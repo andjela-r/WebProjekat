@@ -10,9 +10,9 @@ public class Komentar implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   @ManyToOne
-   @JoinColumn(name = "kupac_id")
-   private Kupac kupac;
+    @OneToOne
+    @JoinColumn(name = "porudzbine_kupac_id")
+    private Kupac k;
 
     @OneToOne
     @JoinColumn(name = "restoran_id")
@@ -24,14 +24,23 @@ public class Komentar implements Serializable {
     @Column
     private int ocena;
 
+    public com.example.demo.entity.Kupac getK() {
+        return k;
+    }
+
     public Komentar() {
     }
 
-    public Komentar(Long id, Restoran restoran, String tekst, int ocena) {
+    public Komentar(Long id, Kupac k, Restoran restoran, String tekst, int ocena) {
         this.id = id;
+        this.k = k;
         this.restoran = restoran;
         this.tekst = tekst;
         this.ocena = ocena;
+    }
+
+    public void setK(Kupac k) {
+        this.k = k;
     }
 
     public Long getId() {
@@ -43,10 +52,10 @@ public class Komentar implements Serializable {
     }
 
     public Kupac getKupac() {
-        return kupac;
+        return k;
     }
     public void setKupac(Kupac kupac) {
-        this.kupac = kupac;
+        this.k = kupac;
     }
 
     public Restoran getRestoran() {

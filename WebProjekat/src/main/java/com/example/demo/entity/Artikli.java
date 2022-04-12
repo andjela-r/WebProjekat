@@ -28,23 +28,36 @@ public class Artikli implements Serializable {
     private String opis;
 
     @ManyToMany
-    @JoinColumn(name = "restoran_id")
-    private Restoran restoran;
+    @JoinTable(name = "imaRestoran",
+            joinColumns = @JoinColumn(name = "artikli_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "restoran_id", referencedColumnName = "id"))
+    private Set<Restoran> restoran = new HashSet<>();
 
-    public Restoran getRestoan() {
-        return restoran;
-    }
+    @ManyToMany
+    @JoinTable(name = "pripadaPorudzbini",
+            joinColumns = @JoinColumn(name = "artikli_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "porudzbina_id", referencedColumnName = "id"))
+    private Set<Porudzbina> porudzbina = new HashSet<>();
 
-    public Artikli(Long id, String naziv, double cena, String tip, int kolicina, String opis) {
+    public Artikli(Long id, String naziv, double cena, String tip, int kolicina, String opis, Set<Restoran> restoran) {
         this.id = id;
         this.naziv = naziv;
         this.cena = cena;
         this.tip = tip;
         this.kolicina = kolicina;
         this.opis = opis;
+        this.restoran = restoran;
     }
 
     public Artikli() {
+    }
+
+    public Set<Restoran> getRestoran() {
+        return restoran;
+    }
+
+    public void setRestoran(Set<Restoran> restoran) {
+        this.restoran = restoran;
     }
 
     public Long getId() {
@@ -94,4 +107,5 @@ public class Artikli implements Serializable {
     public void setOpis(String opis) {
         this.opis = opis;
     }
+
 }

@@ -15,6 +15,7 @@ public class Dostavljac extends Korisnik implements Serializable {
     public Dostavljac() {
     }
 
+
     public Dostavljac(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, Date datum_rodjenja, String pol, Uloga uloga, Set<Porudzbina> porudzbina_dostavljac) {
         super(id, korisnicko_ime, lozinka, ime, prezime, datum_rodjenja, pol, uloga);
         this.porudzbina_dostavljac = porudzbina_dostavljac;

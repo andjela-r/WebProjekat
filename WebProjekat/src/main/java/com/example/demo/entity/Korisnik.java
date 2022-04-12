@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Korisnik implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +48,7 @@ public class Korisnik implements Serializable {
         this.pol = pol;
         this.uloga = uloga;
     }
+
 
     public Long getId() {
         return id;

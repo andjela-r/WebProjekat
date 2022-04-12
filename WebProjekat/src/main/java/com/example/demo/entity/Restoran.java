@@ -19,17 +19,21 @@ public class Restoran implements Serializable {
     private String tip;
 
     @OneToOne
-    @JoinColumn(name = "restoran_id")
-    private Lokacija restoran;
-
-    @OneToOne
     @JoinColumn(name = "lokacija_id")
     private Lokacija lokacija;
 
+    @ManyToMany
+    @JoinTable(name = "imaArtikle",
+            joinColumns = @JoinColumn(name = "restoran_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "artikli_id", referencedColumnName = "id"))
+    private Set<Restoran> restoran = new HashSet<>();
 
-   /* @ManyToMany
-    @JoinColumn(name = "artikli_id")
-    private Artikli artikli;*/
+    @ManyToMany
+    @JoinTable(name = "pripadaPorudzbini",
+            joinColumns = @JoinColumn(name = "restoran_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "porudzbina_id", referencedColumnName = "id"))
+    private Set<Porudzbina> porudzbina = new HashSet<>();
+
 
     public Lokacija getLokacija() {
         return lokacija;
@@ -38,10 +42,11 @@ public class Restoran implements Serializable {
     public Restoran() {
     }
 
-    public Restoran(Long id, String naziv, String tip, Lokacija restoran) {
+    public Restoran(Long id, String naziv, String tip, Lokacija lokacija, Set<Restoran> restoran) {
         this.id = id;
         this.naziv = naziv;
         this.tip = tip;
+        this.lokacija = lokacija;
         this.restoran = restoran;
     }
 
@@ -69,13 +74,16 @@ public class Restoran implements Serializable {
         this.tip = tip;
     }
 
-    public Lokacija getRestoran() {
+    public void setLokacija(com.example.demo.entity.Lokacija lokacija) {
+        this.lokacija = lokacija;
+    }
+
+    public Set<Restoran> getRestoran() {
         return restoran;
     }
 
-    public void setRestoran(Lokacija restoran) {
+    public void setRestoran(Set<Restoran> restoran) {
         this.restoran = restoran;
     }
-
 }
 

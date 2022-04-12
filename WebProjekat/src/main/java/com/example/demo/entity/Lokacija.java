@@ -31,14 +31,19 @@ public class Lokacija implements Serializable {
         return restoran;
     }
 
-    public Lokacija(Long id, Long duzina, Long sirina, String adresa) {
+    public Lokacija(Long id, Long duzina, Long sirina, String adresa, Restoran restoran) {
         this.id = id;
         this.duzina = duzina;
         this.sirina = sirina;
         this.adresa = adresa;
+        this.restoran = restoran;
     }
 
     public Lokacija() {
+    }
+
+    public void setRestoran(Restoran restoran) {
+        this.restoran = restoran;
     }
 
     public Long getId() {
