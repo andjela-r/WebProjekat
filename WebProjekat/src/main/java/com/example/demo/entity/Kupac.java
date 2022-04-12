@@ -69,7 +69,13 @@ public class Kupac extends Korisnik implements Serializable {
         return komentar;
     }
 
-    //public Porudzbina getP() {
-    //    return p;
-    //}
+    @Override
+    public String toString() {
+        return "Kupac{" +
+                "porudzbina=" + porudzbina +
+                ", komentar=" + komentar +
+                ", broj_bodova=" + broj_bodova +
+                ", tip_kupca=" + tip_kupca +
+                '}';
+    }
 }

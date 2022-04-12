@@ -105,4 +105,17 @@ public class Artikli implements Serializable {
         this.opis = opis;
     }
 
+    @Override
+    public String toString() {
+        return "Artikli{" +
+                "id=" + id +
+                ", naziv='" + naziv + '\'' +
+                ", cena=" + cena +
+                ", tip='" + tip + '\'' +
+                ", kolicina=" + kolicina +
+                ", opis='" + opis + '\'' +
+                ", restoran=" + restoran +
+                ", porudzbina=" + porudzbina +
+                '}';
+    }
 }

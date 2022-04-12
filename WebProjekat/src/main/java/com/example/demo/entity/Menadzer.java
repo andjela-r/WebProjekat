@@ -26,4 +26,11 @@ public class Menadzer extends Korisnik implements Serializable {
     public void setRestoran(Restoran restoran) {
         this.restoran = restoran;
     }
+
+    @Override
+    public String toString() {
+        return "Menadzer{" +
+                "restoran=" + restoran +
+                '}';
+    }
 }

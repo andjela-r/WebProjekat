@@ -77,4 +77,16 @@ public class Lokacija implements Serializable {
     public void setAdresa(String adresa) {
         this.adresa = adresa;
     }
+
+    @Override
+    public String toString() {
+        return "Lokacija{" +
+                "id=" + id +
+                ", duzina=" + duzina +
+                ", sirina=" + sirina +
+                ", adresa='" + adresa + '\'' +
+                ", restoran=" + restoran +
+                '}';
+    }
 }
+

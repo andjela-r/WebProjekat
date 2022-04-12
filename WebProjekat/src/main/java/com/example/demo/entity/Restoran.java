@@ -85,5 +85,17 @@ public class Restoran implements Serializable {
     public void setRestoran(Set<Restoran> restoran) {
         this.restoran = restoran;
     }
+
+    @Override
+    public String toString() {
+        return "Restoran{" +
+                "id=" + id +
+                ", naziv='" + naziv + '\'' +
+                ", tip='" + tip + '\'' +
+                ", lokacija=" + lokacija +
+                ", restoran=" + restoran +
+                ", porudzbina=" + porudzbina +
+                '}';
+    }
 }
 
