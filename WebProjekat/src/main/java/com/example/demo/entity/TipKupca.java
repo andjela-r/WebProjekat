@@ -1,8 +1,11 @@
 package com.example.demo.entity;
 
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
 public class TipKupca implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
 public class Kupac extends Korisnik implements Serializable {
 
     //FIXME @Column
