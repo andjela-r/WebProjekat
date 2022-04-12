@@ -1,4 +1,7 @@
 package com.example.demo.repository;
 
-public interface PorudzbinaRepository {
+import com.example.demo.entity.Porudzbina;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PorudzbinaRepository extends JpaRepository<Porudzbina, Long>{
 }
