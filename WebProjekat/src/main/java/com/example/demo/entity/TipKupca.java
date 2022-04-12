@@ -59,4 +59,14 @@ public class TipKupca implements Serializable {
     public void setTrazeni_broj_bodova(double trazeni_broj_bodova) {
         this.trazeni_broj_bodova = trazeni_broj_bodova;
     }
+
+    @Override
+    public String toString() {
+        return "TipKupca{" +
+                "id=" + id +
+                ", ime='" + ime + '\'' +
+                ", popust=" + popust +
+                ", trazeni_broj_bodova=" + trazeni_broj_bodova +
+                '}';
+    }
 }

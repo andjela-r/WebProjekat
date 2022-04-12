@@ -132,4 +132,18 @@ public class Porudzbina implements Serializable {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Porudzbina{" +
+                "id=" + id +
+                ", artikli=" + artikli +
+                ", restoran=" + restoran +
+                ", dostavljac=" + dostavljac +
+                ", datum=" + datum +
+                ", cena=" + cena +
+                ", status=" + status +
+                ", kupac=" + kupac +
+                '}';
+    }
 }
+

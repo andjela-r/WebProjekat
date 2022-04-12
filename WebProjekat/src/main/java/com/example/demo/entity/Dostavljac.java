@@ -28,4 +28,11 @@ public class Dostavljac extends Korisnik implements Serializable {
     public void setPorudzbina_dostavljac(Set<Porudzbina> porudzbina_dostavljac) {
         this.porudzbina_dostavljac = porudzbina_dostavljac;
     }
+
+    @Override
+    public String toString() {
+        return "Dostavljac{" +
+                "porudzbina_dostavljac=" + porudzbina_dostavljac +
+                '}';
+    }
 }

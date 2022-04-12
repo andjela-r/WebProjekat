@@ -81,4 +81,15 @@ public class Komentar implements Serializable {
     public void setOcena(int ocena) {
         this.ocena = ocena;
     }
+
+    @Override
+    public String toString() {
+        return "Komentar{" +
+                "id=" + id +
+                ", k=" + k +
+                ", restoran=" + restoran +
+                ", tekst='" + tekst + '\'' +
+                ", ocena=" + ocena +
+                '}';
+    }
 }

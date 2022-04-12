@@ -113,4 +113,18 @@ public class Korisnik implements Serializable {
     public void setUloga(Uloga uloga) {
         this.uloga = uloga;
     }
+
+    @Override
+    public String toString() {
+        return "Korisnik{" +
+                "id=" + id +
+                ", korisnicko_ime='" + korisnicko_ime + '\'' +
+                ", lozinka='" + lozinka + '\'' +
+                ", ime='" + ime + '\'' +
+                ", prezime='" + prezime + '\'' +
+                ", datum_rodjenja=" + datum_rodjenja +
+                ", pol='" + pol + '\'' +
+                ", uloga=" + uloga +
+                '}';
+    }
 }
