@@ -28,7 +28,13 @@ public class Porudzbina implements Serializable {
     )
     private UUID id;
 
-    @ManyToMany(mappedBy = "porudzbina")
+    /*@ManyToMany(mappedBy = "porudzbina")
+    private Set<Artikli> artikli = new HashSet<>();*/
+
+    @ManyToMany
+    @JoinTable(name = "imaArtikle",
+            joinColumns = @JoinColumn(name = "porudzbina_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "artikli_id", referencedColumnName = "id"))
     private Set<Artikli> artikli = new HashSet<>();
 
     @ManyToMany

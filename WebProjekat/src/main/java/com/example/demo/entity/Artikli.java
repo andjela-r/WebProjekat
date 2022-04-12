@@ -33,11 +33,8 @@ public class Artikli implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "restoran_id", referencedColumnName = "id"))
     private Set<Restoran> restoran = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "pripadaPorudzbini",
-            joinColumns = @JoinColumn(name = "artikli_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "porudzbina_id", referencedColumnName = "id"))
-    private Set<Porudzbina> porudzbina = new HashSet<>();
+    @ManyToMany(mappedBy = "artikli")
+    private Set<Artikli> artikli = new HashSet<>();
 
     public Artikli(Long id, String naziv, double cena, String tip, int kolicina, String opis, Set<Restoran> restoran) {
         this.id = id;
