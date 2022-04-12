@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import com.example.demo.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,14 +16,12 @@ public class DemoApplication implements CommandLineRunner {
 	/* Da bismo testirali repozitorijum, direktno smo pozvali u glavnoj klasi metode,
 	   inace bi pozivi bili u npr. nekom od servisa.
 	 */
-	@Autowired
-	private EmployeeRepository employeeRepository;
 
 	@Override
 	public void run(String... args) {
 
 		// kreiramo novi objekat klase Employee
-		Employee employee = new Employee();
+		/*Employee employee = new Employee();
 		employee.setFirstName("Jovanka");
 		employee.setLastName("Jovkić");
 		employee.setPosition("radnik");
@@ -40,7 +37,7 @@ public class DemoApplication implements CommandLineRunner {
 
 		for (Employee e : employees){
 			System.out.println(e);
-		}
+		}*/
 	}
 
 
