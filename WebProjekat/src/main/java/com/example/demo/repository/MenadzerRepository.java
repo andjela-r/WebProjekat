@@ -1,4 +1,7 @@
 package com.example.demo.repository;
 
-public interface MenadzerRepository {
+import com.example.demo.entity.Menadzer;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MenadzerRepository extends JpaRepository<Menadzer, Long>{
 }

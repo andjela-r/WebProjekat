@@ -1,6 +1,5 @@
 package com.example.demo;
 
-
 import com.example.demo.entity.Korisnik;
 import com.example.demo.repository.KorisnikRepository;
 
@@ -48,7 +47,7 @@ public class DemoApplication implements CommandLineRunner {
 		// čuvamo objekat u bazi
 		this.korisnikRepository.save(korisnik);
 
-		/*for (Korisnik k : korisnik){
+		/* for (Korisnik k : korisnik){
 			System.out.println(k);
 		}*/
 	}
