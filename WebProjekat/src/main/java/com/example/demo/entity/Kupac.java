@@ -22,8 +22,6 @@ public class Kupac extends Korisnik implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "tip_kupca_id")
-
-    @Column
     private TipKupca tip_kupca;
 
     //TODO VEZA

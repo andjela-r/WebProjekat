@@ -34,7 +34,7 @@ public class Artikli implements Serializable {
     private Set<Restoran> restoran = new HashSet<>();
 
     @ManyToMany(mappedBy = "artikli")
-    private Set<Artikli> artikli = new HashSet<>();
+    private Set<Porudzbina> porudzbina = new HashSet<>();
 
     public Artikli(Long id, String naziv, double cena, String tip, int kolicina, String opis, Set<Restoran> restoran) {
         this.id = id;
