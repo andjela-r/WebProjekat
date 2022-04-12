@@ -8,24 +8,28 @@ import java.util.Set;
 @Entity
 public class Kupac extends Korisnik implements Serializable {
 
-
     @OneToMany
     @JoinColumn(name = "porudzbine_kupac_id")
     private Set<Porudzbina> porudzbine_kupac;
 
+    /*@ManyToMany
+    @JoinColumn(name = "p_id")
+    private Porudzbina p;*/
+
+    @OneToOne
+    @JoinColumn(name = "komentar_id")
+    private Komentar komentar;
+
     @Column
     private int broj_bodova;
 
-
-
     @ManyToOne
     @JoinColumn(name = "tip_kupca_id")
+
+    @Column
     private TipKupca tip_kupca;
 
-    public TipKupca getTip_kupca() {
-        return tip_kupca;
-    }
-
+    //TODO VEZA
 
     public Kupac() {
     }
@@ -56,4 +60,16 @@ public class Kupac extends Korisnik implements Serializable {
     public void setTip_kupca(TipKupca tip_kupca) {
         this.tip_kupca = tip_kupca;
     }
+
+    public TipKupca getTip_kupca() {
+        return tip_kupca;
+    }
+
+    public Komentar getKomentar() {
+        return komentar;
+    }
+
+    //public Porudzbina getP() {
+    //    return p;
+    //}
 }

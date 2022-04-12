@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -35,6 +34,10 @@ public class Porudzbina implements Serializable {
     @JoinColumn(name = "restoran_id")
     private Restoran restoran;
 
+    @ManyToOne
+    @JoinColumn(name = "dostavljac_id")
+    private Dostavljac dostavljac;
+
     @Column
     private Date datum;
 
@@ -47,6 +50,14 @@ public class Porudzbina implements Serializable {
     @ManyToOne
     @JoinColumn(name = "kupac_id")
     private Kupac kupac;
+
+    public Dostavljac getDostavljac() {
+        return dostavljac;
+    }
+
+    public Kupac getKupac() {
+        return kupac;
+    }
 
     public Porudzbina(UUID id, Artikli artikli, Restoran restoran, Date datum, double cena, STATUS status, Kupac kupac) {
         this.id = id;
@@ -109,11 +120,4 @@ public class Porudzbina implements Serializable {
         this.status = status;
     }
 
-    public Kupac getKupac() {
-        return kupac;
-    }
-
-    public void setKupac(Kupac kupac) {
-        this.kupac = kupac;
-    }
 }

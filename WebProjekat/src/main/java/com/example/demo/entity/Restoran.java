@@ -23,8 +23,17 @@ public class Restoran implements Serializable {
     private Lokacija restoran;
 
     @OneToOne
+    @JoinColumn(name = "lokacija_id")
+    private Lokacija lokacija;
+
+
+   /* @ManyToMany
     @JoinColumn(name = "artikli_id")
-    private Artikli artikli;
+    private Artikli artikli;*/
+
+    public Lokacija getLokacija() {
+        return lokacija;
+    }
 
     public Restoran() {
     }

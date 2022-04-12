@@ -23,12 +23,13 @@ public class Lokacija implements Serializable {
     @Column
     private String adresa;
 
-   /* @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Set<Department> departments = new HashSet<>();
+    @OneToOne
+    @JoinColumn(name = "restoran_id")
+    private Restoran restoran;
 
-        VEZA
-    */
+    public Restoran getRestoran() {
+        return restoran;
+    }
 
     public Lokacija(Long id, Long duzina, Long sirina, String adresa) {
         this.id = id;

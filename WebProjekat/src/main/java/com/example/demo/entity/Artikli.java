@@ -27,6 +27,14 @@ public class Artikli implements Serializable {
     @Column
     private String opis;
 
+    @ManyToMany
+    @JoinColumn(name = "restoran_id")
+    private Restoran restoran;
+
+    public Restoran getRestoan() {
+        return restoran;
+    }
+
     public Artikli(Long id, String naziv, double cena, String tip, int kolicina, String opis) {
         this.id = id;
         this.naziv = naziv;

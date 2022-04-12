@@ -1,7 +1,11 @@
 package com.example.demo;
 
+<<<<<<< HEAD
 import com.example.demo.entity.Korisnik;
 import com.example.demo.repository.KorisnikRepository;
+=======
+
+>>>>>>> 47edb1cc2f0034ae61659b47edab27744c9434f5
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
