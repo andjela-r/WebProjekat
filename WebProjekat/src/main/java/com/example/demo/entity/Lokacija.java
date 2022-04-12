@@ -20,13 +20,6 @@ public class Lokacija implements Serializable {
 
     private String adresa;
 
-   /* @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Set<Department> departments = new HashSet<>();
-
-        VEZA
-    */
-
     public Lokacija(Long id, Long duzina, Long sirina, String adresa) {
         this.id = id;
         this.duzina = duzina;
