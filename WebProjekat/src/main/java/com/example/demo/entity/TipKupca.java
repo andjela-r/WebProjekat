@@ -1,7 +1,5 @@
 package com.example.demo.entity;
 
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -19,9 +17,6 @@ public class TipKupca implements Serializable {
 
     @Column
     private double trazeni_broj_bodova;
-
-    //TODO VEZA
-
 
     public TipKupca() {
     }

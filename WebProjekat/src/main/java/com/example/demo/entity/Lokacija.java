@@ -1,4 +1,4 @@
-package vezbe.demo.model;
+package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,10 +14,13 @@ public class Lokacija implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private Long duzina;
 
+    @Column
     private Long sirina;
 
+    @Column
     private String adresa;
 
    /* @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)

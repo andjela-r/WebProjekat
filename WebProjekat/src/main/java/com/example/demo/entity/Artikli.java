@@ -1,4 +1,4 @@
-package vezbe.demo.model;
+package com.example.demo.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,14 +12,19 @@ public class Artikli implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String naziv;
 
+    @Column
     private double cena;
 
+    @Column
     private String tip;
 
+    @Column
     private int kolicina;
 
+    @Column
     private String opis;
 
     public Artikli(Long id, String naziv, double cena, String tip, int kolicina, String opis) {

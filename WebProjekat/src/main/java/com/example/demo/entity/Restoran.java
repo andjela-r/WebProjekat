@@ -1,4 +1,4 @@
-package vezbe.demo.model;
+package com.example.demo.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,22 +12,24 @@ public class Restoran implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String naziv;
 
+    @Column
     private String tip;
 
     @OneToOne
     @JoinColumn(name = "restoran_id")
-    private vezbe.demo.model.Lokacija restoran;
+    private Lokacija restoran;
 
     @OneToOne
     @JoinColumn(name = "artikli_id")
-    private vezbe.demo.model.Artikli artikli;
+    private Artikli artikli;
 
     public Restoran() {
     }
 
-    public Restoran(Long id, String naziv, String tip, vezbe.demo.model.Lokacija restoran) {
+    public Restoran(Long id, String naziv, String tip, Lokacija restoran) {
         this.id = id;
         this.naziv = naziv;
         this.tip = tip;
@@ -58,11 +60,11 @@ public class Restoran implements Serializable {
         this.tip = tip;
     }
 
-    public vezbe.demo.model.Lokacija getRestoran() {
+    public Lokacija getRestoran() {
         return restoran;
     }
 
-    public void setRestoran(vezbe.demo.model.Lokacija restoran) {
+    public void setRestoran(Lokacija restoran) {
         this.restoran = restoran;
     }
 

@@ -1,11 +1,7 @@
 package com.example.demo.entity;
 
-import vezbe.demo.model.Restoran;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class Komentar implements Serializable {
@@ -14,23 +10,21 @@ public class Komentar implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   //FIXME private Kupac kupac;
+   @ManyToOne
+   @JoinColumn(name = "kupac_id")
+   private Kupac kupac;
 
     @OneToOne
     @JoinColumn(name = "restoran_id")
-    private vezbe.demo.model.Restoran restoran;
+    private Restoran restoran;
 
-    public Restoran getRestoran() {
-        return restoran;
-    }
-
+    @Column
     private String tekst;
 
+    @Column
     private int ocena;
 
-    public Long getId() {
-        return id;
-    }
+
 
     public Komentar() {
     }
@@ -42,15 +36,24 @@ public class Komentar implements Serializable {
         this.ocena = ocena;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
-    //FIXME
-    // - public Kupac getKupac() {
-    //    return kupac;
-    // }
-    // - public void setKupac(Kupac kupac) {
-   //     this.kupac = kupac; }
+
+    public Kupac getKupac() {
+        return kupac;
+    }
+    public void setKupac(Kupac kupac) {
+        this.kupac = kupac;
+    }
+
+    public Restoran getRestoran() {
+        return restoran;
+    }
 
     public void setRestoran(Restoran restoran) {
         this.restoran = restoran;

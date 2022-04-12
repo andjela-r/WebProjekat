@@ -1,11 +1,16 @@
 package com.example.demo;
 
+import com.example.demo.entity.Korisnik;
+import com.example.demo.repository.KorisnikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.List;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import static com.example.demo.entity.Uloga.MENADZER;
 
 /*
    @SpringBootApplication anotacija nastala je od @EnableAutoConfiguration anotacije koja
@@ -17,26 +22,32 @@ public class DemoApplication implements CommandLineRunner {
 	   inace bi pozivi bili u npr. nekom od servisa.
 	 */
 
+	@Autowired
+	private KorisnikRepository korisnikRepository;
+
 	@Override
 	public void run(String... args) {
 
-		// kreiramo novi objekat klase Employee
-		/*Employee employee = new Employee();
-		employee.setFirstName("Jovanka");
-		employee.setLastName("Jovkić");
-		employee.setPosition("radnik");
+
+		Korisnik korisnik = new Korisnik();
+		korisnik.setKorisnicko_ime("pero123");
+		korisnik.setLozinka("adminadmin");
+		korisnik.setIme("Pera");
+		korisnik.setPrezime("Peric");
+		korisnik.setPol("Musko");
+
+		Calendar cal = new GregorianCalendar();
+		cal.set(2001, 7, 31);
+		korisnik.setDatum_rodjenja(cal.getTime());
+
+		korisnik.setUloga(MENADZER);
+
 
 		// čuvamo objekat u bazi
-		this.employeeRepository.save(employee);
+		this.korisnikRepository.save(korisnik);
 
-		List<Employee> employees = this.employeeRepository.findAll();
-//		List<Employee> employees = this.employeeRepository.findAllByPositionOrderByFirstName("radnik");
-//		List<Employee> employees = this.employeeRepository.findByFirstNameOrLastName("Aleksandar", "Milić");
-//		List<Employee> employees = this.employeeRepository.findByFirstNameIgnoreCase("jovanka");
-//		List<Employee> employees = this.employeeRepository.findByDepartmentName("Menadžment");
-
-		for (Employee e : employees){
-			System.out.println(e);
+		/*for (Korisnik k : korisnik){
+			System.out.println(k);
 		}*/
 	}
 

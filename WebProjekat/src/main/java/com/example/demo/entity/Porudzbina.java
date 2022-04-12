@@ -1,8 +1,6 @@
 package com.example.demo.entity;
 
 import org.hibernate.annotations.GenericGenerator;
-import vezbe.demo.model.Artikli;
-import vezbe.demo.model.Restoran;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -29,28 +27,25 @@ public class Porudzbina implements Serializable {
     )
     private UUID id;
 
-   /* @ManyToMany
+    @ManyToMany
     @JoinColumn(name = "artikli_id")
-    private vezbe.demo.model.Artikli artikli;
-
-    public Artikli getArtikli() {
-        return artikli;
-    }
+    private Artikli artikli;
 
     @ManyToMany
     @JoinColumn(name = "restoran_id")
-    private vezbe.demo.model.Restoran restoran;
+    private Restoran restoran;
 
-    public Restoran getRestoran() {
-        return restoran;
-    }*/
-
+    @Column
     private Date datum;
 
+    @Column
     private double cena;
 
+    @Column
     private STATUS status;
 
+    @ManyToOne
+    @JoinColumn(name = "kupac_id")
     private Kupac kupac;
 
     public Porudzbina(UUID id, Artikli artikli, Restoran restoran, Date datum, double cena, STATUS status, Kupac kupac) {
@@ -74,8 +69,16 @@ public class Porudzbina implements Serializable {
         this.id = id;
     }
 
+    public Artikli getArtikli() {
+        return artikli;
+    }
+
     public void setArtikli(Artikli artikli) {
         this.artikli = artikli;
+    }
+
+    public Restoran getRestoran() {
+        return restoran;
     }
 
     public void setRestoran(Restoran restoran) {

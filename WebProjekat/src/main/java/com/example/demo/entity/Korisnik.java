@@ -3,15 +3,6 @@ package com.example.demo.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
-enum Uloga {
-    MENADZER,
-    KUPAC,
-    ADMIN,
-    DOSTAVLJAC
-}
 
 @Entity
 public class Korisnik implements Serializable {
@@ -19,7 +10,7 @@ public class Korisnik implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(unique = true) //(unique = true) omogucava jedinstvenost atributa korisnicko ime, kada Jpa pravi bazu za nas
     private String korisnicko_ime;
 
     @Column
@@ -40,7 +31,7 @@ public class Korisnik implements Serializable {
     @Column
     private Uloga uloga;
 
-    //VEZA
+    //TODO VEZA
 
 
     public Korisnik() {

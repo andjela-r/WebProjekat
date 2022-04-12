@@ -3,27 +3,36 @@ package com.example.demo.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Kupac extends Korisnik implements Serializable {
 
-    //FIXME @Column
-    // private Set<Porudzbina> porudzbine_kupac;
+
+    @OneToMany
+    @JoinColumn(name = "porudzbine_kupac_id")
+    private Set<Porudzbina> porudzbine_kupac;
 
     @Column
     private int broj_bodova;
 
 
-    @Column
+
+    @ManyToOne
+    @JoinColumn(name = "tip_kupca_id")
     private TipKupca tip_kupca;
 
-    //TODO VEZA
+    public TipKupca getTip_kupca() {
+        return tip_kupca;
+    }
+
 
     public Kupac() {
     }
 
-    public Kupac(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, Date datum_rodjenja, String pol, Uloga uloga, int broj_bodova, TipKupca tip_kupca) {
+    public Kupac(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, Date datum_rodjenja, String pol, Uloga uloga, Set<Porudzbina> porudzbine_kupac, int broj_bodova, TipKupca tip_kupca) {
         super(id, korisnicko_ime, lozinka, ime, prezime, datum_rodjenja, pol, uloga);
+        this.porudzbine_kupac = porudzbine_kupac;
         this.broj_bodova = broj_bodova;
         this.tip_kupca = tip_kupca;
     }
@@ -36,5 +45,15 @@ public class Kupac extends Korisnik implements Serializable {
         this.broj_bodova = broj_bodova;
     }
 
-    //TODO geteri i seteri
+    public Set<Porudzbina> getPorudzbine_kupac() {
+        return porudzbine_kupac;
+    }
+
+    public void setPorudzbine_kupac(Set<Porudzbina> porudzbine_kupac) {
+        this.porudzbine_kupac = porudzbine_kupac;
+    }
+
+    public void setTip_kupca(TipKupca tip_kupca) {
+        this.tip_kupca = tip_kupca;
+    }
 }
