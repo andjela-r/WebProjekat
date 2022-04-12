@@ -1,4 +1,4 @@
-package vezbe.demo.model;
+package com.example.demo.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,15 +12,28 @@ public class Artikli implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String naziv;
 
+    @Column
     private double cena;
 
+    @Column
     private String tip;
 
+    @Column
     private int kolicina;
 
+    @Column
     private String opis;
+
+    @ManyToMany
+    @JoinColumn(name = "restoran_id")
+    private vezbe.demo.model.Restoran restoran;
+
+    public vezbe.demo.model.Restoran getRestoan() {
+        return restoan;
+    }
 
     public Artikli(Long id, String naziv, double cena, String tip, int kolicina, String opis) {
         this.id = id;

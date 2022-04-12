@@ -7,8 +7,13 @@ import java.util.Date;
 @Entity
 public class Kupac extends Korisnik implements Serializable {
 
-    //FIXME @Column
-    // private Set<Porudzbina> porudzbine_kupac;
+    @ManyToMany
+    @JoinColumn(name = "p_id")
+    private Porudzbina p;
+
+    @OneToOne
+    @JoinColumn(name = "komentar_id")
+    private Komentar komentar;
 
     @Column
     private int broj_bodova;
@@ -16,6 +21,14 @@ public class Kupac extends Korisnik implements Serializable {
 
     @Column
     private TipKupca tip_kupca;
+
+    public Komentar getKomentar() {
+        return komentar;
+    }
+
+    public Porudzbina getP() {
+        return p;
+    }
 
     //TODO VEZA
 

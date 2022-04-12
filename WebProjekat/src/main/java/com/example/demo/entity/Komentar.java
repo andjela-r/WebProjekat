@@ -24,8 +24,10 @@ public class Komentar implements Serializable {
         return restoran;
     }
 
+    @Column
     private String tekst;
 
+    @Column
     private int ocena;
 
     public Long getId() {
@@ -45,12 +47,14 @@ public class Komentar implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    //FIXME
-    // - public Kupac getKupac() {
-    //    return kupac;
-    // }
-    // - public void setKupac(Kupac kupac) {
-   //     this.kupac = kupac; }
+
+   @OneToOne
+   @JoinColumn(name = "kupac_id")
+   private Kupac kupac;
+
+    public Kupac getKupac() {
+        return kupac;
+    }
 
     public void setRestoran(Restoran restoran) {
         this.restoran = restoran;

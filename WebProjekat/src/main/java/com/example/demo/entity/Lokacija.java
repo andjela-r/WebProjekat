@@ -14,11 +14,22 @@ public class Lokacija implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private Long duzina;
 
+    @Column
     private Long sirina;
 
+    @Column
     private String adresa;
+
+    @OneToOne
+    @JoinColumn(name = "restoran_id")
+    private vezbe.demo.model.Restoran restoran;
+
+    public vezbe.demo.model.Restoran getRestoran() {
+        return restoran;
+    }
 
     public Lokacija(Long id, Long duzina, Long sirina, String adresa) {
         this.id = id;

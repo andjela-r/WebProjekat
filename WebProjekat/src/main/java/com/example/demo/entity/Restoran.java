@@ -12,17 +12,23 @@ public class Restoran implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String naziv;
 
+    @Column
     private String tip;
 
     @OneToOne
-    @JoinColumn(name = "restoran_id")
-    private vezbe.demo.model.Lokacija restoran;
+    @JoinColumn(name = "lokacija_id")
+    private vezbe.demo.model.Lokacija lokacija;
 
-    @OneToOne
+    @ManyToMany
     @JoinColumn(name = "artikli_id")
     private vezbe.demo.model.Artikli artikli;
+
+    public vezbe.demo.model.Lokacija getLokacija() {
+        return lokacija;
+    }
 
     public Restoran() {
     }
