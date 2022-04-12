@@ -43,6 +43,20 @@ public class Korisnik implements Serializable {
     //VEZA
 
 
+    public Korisnik() {
+    }
+
+    public Korisnik(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, Date datum_rodjenja, String pol, Uloga uloga) {
+        this.id = id;
+        this.korisnicko_ime = korisnicko_ime;
+        this.lozinka = lozinka;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.datum_rodjenja = datum_rodjenja;
+        this.pol = pol;
+        this.uloga = uloga;
+    }
+
     public Long getId() {
         return id;
     }
