@@ -1,6 +1,9 @@
 package com.example.demo;
 
-import com.example.demo.repository.EmployeeRepository;
+<<<<<<< HEAD
+=======
+import com.example.demo.entity.Employee;
+>>>>>>> df81e7bfcf5609f6ae05639bca6ada799b6aa186
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
