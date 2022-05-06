@@ -5,10 +5,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-enum TIP{
-    PICE,
-    JELO
-}
+
 
 @Entity
 public class Artikli implements Serializable {
