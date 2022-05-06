@@ -31,13 +31,13 @@ public class Porudzbina implements Serializable {
     /*@ManyToMany(mappedBy = "porudzbina")
     private Set<Artikli> artikli = new HashSet<>();*/
 
-    @ManyToMany //stavka porudbine(klasa) one to many, kolicina i artikal (many to one)
+    @ManyToMany //TODO stavka porudbine(klasa) one to many, kolicina i artikal (many to one)
     @JoinTable(name = "imaArtikle",
             joinColumns = @JoinColumn(name = "porudzbina_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "artikli_id", referencedColumnName = "id"))
     private Set<Artikli> artikli = new HashSet<>();
 
-    @ManyToMany //many to one
+    @ManyToMany //TODO many to one
     private Set<Restoran> restoran = new HashSet<>();
 
     @ManyToOne
