@@ -13,7 +13,7 @@ public class Kupac extends Korisnik implements Serializable {
     @OneToMany(mappedBy = "kupac", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Porudzbina> porudzbina = new HashSet<>();
 
-    @OneToOne //TODO relation = one to many
+    @OneToMany (cascade = CascadeType.ALL) //DONE relation = one to many
     @JoinColumn(name = "komentar_id")
     private Komentar komentar;
 
@@ -28,7 +28,7 @@ public class Kupac extends Korisnik implements Serializable {
     public Kupac() {
     }
 
-    public Kupac(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, Date datumRodjenja, String pol, Uloga uloga, Set<Porudzbina> porudzbina, Komentar komentar, int brojBodova, TipKupca tipKupca) {
+    public Kupac(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, Date datumRodjenja, Pol pol, Uloga uloga, Set<Porudzbina> porudzbina, Komentar komentar, int brojBodova, TipKupca tipKupca) {
         super(id, korisnicko_ime, lozinka, ime, prezime, datumRodjenja, pol, uloga);
         this.porudzbina = porudzbina;
         this.komentar = komentar;
