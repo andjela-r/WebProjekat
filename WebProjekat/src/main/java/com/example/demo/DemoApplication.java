@@ -1,6 +1,7 @@
 package com.example.demo;
 
-import com.example.demo.entity.Korisnik;
+
+import com.example.demo.entity.*;
 import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
+import static com.example.demo.entity.Pol.Zenski;
 import static com.example.demo.entity.Uloga.MENADZER;
 
 /*
@@ -36,7 +37,7 @@ public class DemoApplication implements CommandLineRunner {
 		korisnik.setLozinka("adminadmin");
 		korisnik.setIme("Pera");
 		korisnik.setPrezime("Peric");
-		korisnik.setPol("Musko");
+		korisnik.setPol(Zenski);
 
 		Calendar cal = new GregorianCalendar();
 		cal.set(2001, 7, 31);

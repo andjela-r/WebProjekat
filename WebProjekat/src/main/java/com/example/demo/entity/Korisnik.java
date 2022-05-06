@@ -27,7 +27,7 @@ public class Korisnik implements Serializable {
     private Date datumRodjenja;
 
     @Column
-    private String pol; //enum
+    private Pol pol;
 
     @Column
     private Uloga uloga;
@@ -35,7 +35,7 @@ public class Korisnik implements Serializable {
     public Korisnik() {
     }
 
-    public Korisnik(Long id, String korisnickoIme, String lozinka, String ime, String prezime, Date datumRodjenja, String pol, Uloga uloga) {
+    public Korisnik(Long id, String korisnickoIme, String lozinka, String ime, String prezime, Date datumRodjenja, Pol pol, Uloga uloga) {
         this.id = id;
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
@@ -45,7 +45,6 @@ public class Korisnik implements Serializable {
         this.pol = pol;
         this.uloga = uloga;
     }
-
 
     public Long getId() {
         return id;
@@ -91,15 +90,15 @@ public class Korisnik implements Serializable {
         return datumRodjenja;
     }
 
-    public void setDatumRodjenja(Date datum_rodjenja) {
-        this.datumRodjenja = datum_rodjenja;
+    public void setDatumRodjenja(Date datumRodjenja) {
+        this.datumRodjenja = datumRodjenja;
     }
 
-    public String getPol() {
+    public Pol getPol() {
         return pol;
     }
 
-    public void setPol(String pol) {
+    public void setPol(Pol pol) {
         this.pol = pol;
     }
 
