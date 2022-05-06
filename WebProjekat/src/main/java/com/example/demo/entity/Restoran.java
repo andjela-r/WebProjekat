@@ -22,17 +22,12 @@ public class Restoran implements Serializable {
     @JoinColumn(name = "lokacija_id")
     private Lokacija lokacija;
 
-    @ManyToMany
-    @JoinTable(name = "imaArtikle",
-            joinColumns = @JoinColumn(name = "restoran_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "artikli_id", referencedColumnName = "id"))
-    private Set<Restoran> restoran = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "pripadaPorudzbini",
-            joinColumns = @JoinColumn(name = "restoran_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "porudzbina_id", referencedColumnName = "id"))
-    private Set<Porudzbina> porudzbina = new HashSet<>();
+    @OneToMany // DONE one to many
+    private Set<Artikli> artikliRestoran = new HashSet<>(); //artikli treba da budu
+
+//    @OneToMany //DONE one to many
+//    private Set<Porudzbina> porudzbine = new HashSet<>();
 
 
     public Lokacija getLokacija() {
@@ -42,12 +37,12 @@ public class Restoran implements Serializable {
     public Restoran() {
     }
 
-    public Restoran(Long id, String naziv, String tip, Lokacija lokacija, Set<Restoran> restoran) {
+    public Restoran(Long id, String naziv, String tip, Lokacija lokacija, Set<Artikli> artikliRestoran) {
         this.id = id;
         this.naziv = naziv;
         this.tip = tip;
         this.lokacija = lokacija;
-        this.restoran = restoran;
+        this.artikliRestoran = artikliRestoran;
     }
 
     public Long getId() {
@@ -78,12 +73,12 @@ public class Restoran implements Serializable {
         this.lokacija = lokacija;
     }
 
-    public Set<Restoran> getRestoran() {
-        return restoran;
+    public Set<Artikli> getArtikliRestoran() {
+        return artikliRestoran;
     }
 
-    public void setRestoran(Set<Restoran> restoran) {
-        this.restoran = restoran;
+    public void setArtikliRestoran(Set<Artikli> artikliRestoran) {
+        this.artikliRestoran = artikliRestoran;
     }
 
     @Override
@@ -93,8 +88,8 @@ public class Restoran implements Serializable {
                 ", naziv='" + naziv + '\'' +
                 ", tip='" + tip + '\'' +
                 ", lokacija=" + lokacija +
-                ", restoran=" + restoran +
-                ", porudzbina=" + porudzbina +
+                ", restoran=" + artikliRestoran +
+                ", porudzbina=" +                           // porudzbine +
                 '}';
     }
 }

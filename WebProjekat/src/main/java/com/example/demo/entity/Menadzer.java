@@ -14,8 +14,8 @@ public class Menadzer extends Korisnik implements Serializable {
     public Menadzer() {
     }
 
-    public Menadzer(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, Date datum_rodjenja, String pol, Uloga uloga, Restoran restoran) {
-        super(id, korisnicko_ime, lozinka, ime, prezime, datum_rodjenja, pol, uloga);
+    public Menadzer(Long id, String korisnickoIme, String lozinka, String ime, String prezime, Date datumRodjenja, String pol, Uloga uloga, Restoran restoran) {
+        super(id, korisnickoIme, lozinka, ime, prezime, datumRodjenja, pol, uloga);
         this.restoran = restoran;
     }
 
@@ -29,7 +29,7 @@ public class Menadzer extends Korisnik implements Serializable {
 
     @Override
     public String toString() {
-        return "Menadzer{" +
+        return "Menadzer{" + super.toString()+
                 "restoran=" + restoran +
                 '}';
     }

@@ -15,35 +15,30 @@ public class Lokacija implements Serializable {
     private Long id;
 
     @Column
-    private Long duzina;
+    private double duzina; //DONE double
 
     @Column
-    private Long sirina;
+    private double sirina; //DONE double
 
     @Column
     private String adresa;
 
-    @OneToOne
+    /*@OneToOne
     @JoinColumn(name = "restoran_id")
     private Restoran restoran;
 
-    public Restoran getRestoran() {
+    public Restoran getArtikliRestoran() {
         return restoran;
-    }
+    }*/
 
-    public Lokacija(Long id, Long duzina, Long sirina, String adresa, Restoran restoran) {
+    public Lokacija(Long id, double duzina, double sirina, String adresa) {
         this.id = id;
         this.duzina = duzina;
         this.sirina = sirina;
         this.adresa = adresa;
-        this.restoran = restoran;
     }
 
     public Lokacija() {
-    }
-
-    public void setRestoran(Restoran restoran) {
-        this.restoran = restoran;
     }
 
     public Long getId() {
@@ -54,7 +49,7 @@ public class Lokacija implements Serializable {
         this.id = id;
     }
 
-    public Long getDuzina() {
+    public double getDuzina() {
         return duzina;
     }
 
@@ -62,7 +57,7 @@ public class Lokacija implements Serializable {
         this.duzina = duzina;
     }
 
-    public Long getSirina() {
+    public double getSirina() {
         return sirina;
     }
 
@@ -85,7 +80,6 @@ public class Lokacija implements Serializable {
                 ", duzina=" + duzina +
                 ", sirina=" + sirina +
                 ", adresa='" + adresa + '\'' +
-                ", restoran=" + restoran +
                 '}';
     }
 }

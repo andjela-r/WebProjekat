@@ -31,13 +31,13 @@ public class Porudzbina implements Serializable {
     /*@ManyToMany(mappedBy = "porudzbina")
     private Set<Artikli> artikli = new HashSet<>();*/
 
-    @ManyToMany
+    @ManyToMany //stavka porudbine(klasa) one to many, kolicina i artikal (many to one)
     @JoinTable(name = "imaArtikle",
             joinColumns = @JoinColumn(name = "porudzbina_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "artikli_id", referencedColumnName = "id"))
     private Set<Artikli> artikli = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany //many to one
     private Set<Restoran> restoran = new HashSet<>();
 
     @ManyToOne
@@ -64,8 +64,10 @@ public class Porudzbina implements Serializable {
         return kupac;
     }
 
-    public Porudzbina(UUID id, Artikli artikli, Restoran restoran, Dostavljac dostavljac, Date datum, double cena, STATUS status, Kupac kupac) {
+    public Porudzbina(UUID id, Set<Artikli> artikli, Set<Restoran> restoran, Dostavljac dostavljac, Date datum, double cena, STATUS status, Kupac kupac) {
         this.id = id;
+        this.artikli = artikli;
+        this.restoran = restoran;
         this.dostavljac = dostavljac;
         this.datum = datum;
         this.cena = cena;

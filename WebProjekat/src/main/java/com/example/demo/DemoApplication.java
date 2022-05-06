@@ -3,7 +3,6 @@ package com.example.demo;
 import com.example.demo.entity.Korisnik;
 import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,7 +32,7 @@ public class DemoApplication implements CommandLineRunner {
 
 
 		Korisnik korisnik = new Korisnik();
-		korisnik.setKorisnicko_ime("pero123");
+		korisnik.setKorisnickoIme("pero123");
 		korisnik.setLozinka("adminadmin");
 		korisnik.setIme("Pera");
 		korisnik.setPrezime("Peric");
@@ -41,7 +40,7 @@ public class DemoApplication implements CommandLineRunner {
 
 		Calendar cal = new GregorianCalendar();
 		cal.set(2001, 7, 31);
-		korisnik.setDatum_rodjenja(cal.getTime());
+		korisnik.setDatumRodjenja(cal.getTime());
 
 		korisnik.setUloga(MENADZER);
 

@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.*;
 
 @Entity
 public class TipKupca implements Serializable {
@@ -16,16 +17,19 @@ public class TipKupca implements Serializable {
     private double popust;
 
     @Column
-    private double trazeni_broj_bodova;
+    private double trazeniBrojBodova;
+
+//    @OneToMany(mappedBy = "tipKupca", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<Kupac> kupac = new HashSet<>();
 
     public TipKupca() {
     }
 
-    public TipKupca(Long id, String ime, double popust, double trazeni_broj_bodova) {
+    public TipKupca(Long id, String ime, double popust, double trazeniBrojBodova) {
         this.id = id;
         this.ime = ime;
         this.popust = popust;
-        this.trazeni_broj_bodova = trazeni_broj_bodova;
+        this.trazeniBrojBodova = trazeniBrojBodova;
     }
 
     public Long getId() {
@@ -52,12 +56,12 @@ public class TipKupca implements Serializable {
         this.popust = popust;
     }
 
-    public double getTrazeni_broj_bodova() {
-        return trazeni_broj_bodova;
+    public double getTrazeniBrojBodova() {
+        return trazeniBrojBodova;
     }
 
-    public void setTrazeni_broj_bodova(double trazeni_broj_bodova) {
-        this.trazeni_broj_bodova = trazeni_broj_bodova;
+    public void setTrazeniBrojBodova(double trazeniBrojBodova) {
+        this.trazeniBrojBodova = trazeniBrojBodova;
     }
 
     @Override
@@ -66,7 +70,7 @@ public class TipKupca implements Serializable {
                 "id=" + id +
                 ", ime='" + ime + '\'' +
                 ", popust=" + popust +
-                ", trazeni_broj_bodova=" + trazeni_broj_bodova +
+                ", trazeni_broj_bodova=" + trazeniBrojBodova +
                 '}';
     }
 }

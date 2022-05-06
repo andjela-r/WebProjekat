@@ -12,7 +12,7 @@ public class Korisnik implements Serializable {
     private Long id;
 
     @Column(unique = true) //(unique = true) omogucava jedinstvenost atributa korisnicko ime, kada Jpa pravi bazu za nas
-    private String korisnicko_ime;
+    private String korisnickoIme; // DONE camel case
 
     @Column
     private String lozinka;
@@ -24,27 +24,24 @@ public class Korisnik implements Serializable {
     private String prezime;
 
     @Column
-    private Date datum_rodjenja;
+    private Date datumRodjenja;
 
     @Column
-    private String pol;
+    private String pol; //enum
 
     @Column
     private Uloga uloga;
 
-    //TODO VEZA
-
-
     public Korisnik() {
     }
 
-    public Korisnik(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, Date datum_rodjenja, String pol, Uloga uloga) {
+    public Korisnik(Long id, String korisnickoIme, String lozinka, String ime, String prezime, Date datumRodjenja, String pol, Uloga uloga) {
         this.id = id;
-        this.korisnicko_ime = korisnicko_ime;
+        this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
         this.ime = ime;
         this.prezime = prezime;
-        this.datum_rodjenja = datum_rodjenja;
+        this.datumRodjenja = datumRodjenja;
         this.pol = pol;
         this.uloga = uloga;
     }
@@ -58,12 +55,12 @@ public class Korisnik implements Serializable {
         this.id = id;
     }
 
-    public String getKorisnicko_ime() {
-        return korisnicko_ime;
+    public String getKorisnickoIme() {
+        return korisnickoIme;
     }
 
-    public void setKorisnicko_ime(String korisnicko_ime) {
-        this.korisnicko_ime = korisnicko_ime;
+    public void setKorisnickoIme(String korisnickoIme) {
+        this.korisnickoIme = korisnickoIme;
     }
 
     public String getLozinka() {
@@ -90,12 +87,12 @@ public class Korisnik implements Serializable {
         this.prezime = prezime;
     }
 
-    public Date getDatum_rodjenja() {
-        return datum_rodjenja;
+    public Date getDatumRodjenja() {
+        return datumRodjenja;
     }
 
-    public void setDatum_rodjenja(Date datum_rodjenja) {
-        this.datum_rodjenja = datum_rodjenja;
+    public void setDatumRodjenja(Date datum_rodjenja) {
+        this.datumRodjenja = datum_rodjenja;
     }
 
     public String getPol() {
@@ -118,11 +115,11 @@ public class Korisnik implements Serializable {
     public String toString() {
         return "Korisnik{" +
                 "id=" + id +
-                ", korisnicko_ime='" + korisnicko_ime + '\'' +
+                ", korisnicko_ime='" + korisnickoIme + '\'' +
                 ", lozinka='" + lozinka + '\'' +
                 ", ime='" + ime + '\'' +
                 ", prezime='" + prezime + '\'' +
-                ", datum_rodjenja=" + datum_rodjenja +
+                ", datum_rodjenja=" + datumRodjenja +
                 ", pol='" + pol + '\'' +
                 ", uloga=" + uloga +
                 '}';

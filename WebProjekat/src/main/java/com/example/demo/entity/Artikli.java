@@ -5,6 +5,11 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+enum TIP{
+    PICE,
+    JELO
+}
+
 @Entity
 public class Artikli implements Serializable {
 
@@ -19,42 +24,33 @@ public class Artikli implements Serializable {
     private double cena;
 
     @Column
-    private String tip;
+    private TIP tip; //DONE enum
 
     @Column
-    private int kolicina;
+    private double kolicina; //DONE double
 
     @Column
     private String opis;
 
-    @ManyToMany
-    @JoinTable(name = "imaRestoran",
-            joinColumns = @JoinColumn(name = "artikli_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "restoran_id", referencedColumnName = "id"))
-    private Set<Restoran> restoran = new HashSet<>();
+//    @ManyToMany //ne treba ova relacija
+//    @JoinTable(name = "imaRestoran",
+//            joinColumns = @JoinColumn(name = "artikli_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "restoran_id", referencedColumnName = "id"))
+//    private Set<Restoran> restoran = new HashSet<>();
+//
+//    @ManyToMany(mappedBy = "artikli") //klasa
+//    private Set<Porudzbina> porudzbina = new HashSet<>();
 
-    @ManyToMany(mappedBy = "artikli")
-    private Set<Porudzbina> porudzbina = new HashSet<>();
-
-    public Artikli(Long id, String naziv, double cena, String tip, int kolicina, String opis, Set<Restoran> restoran) {
+    public Artikli(Long id, String naziv, double cena, TIP tip, double kolicina, String opis) {
         this.id = id;
         this.naziv = naziv;
         this.cena = cena;
         this.tip = tip;
         this.kolicina = kolicina;
         this.opis = opis;
-        this.restoran = restoran;
     }
 
     public Artikli() {
-    }
-
-    public Set<Restoran> getRestoran() {
-        return restoran;
-    }
-
-    public void setRestoran(Set<Restoran> restoran) {
-        this.restoran = restoran;
     }
 
     public Long getId() {
@@ -81,21 +77,13 @@ public class Artikli implements Serializable {
         this.cena = cena;
     }
 
-    public String getTip() {
-        return tip;
-    }
+    public TIP getTip() { return tip; }
 
-    public void setTip(String tip) {
-        this.tip = tip;
-    }
+    public void setTip(TIP tip) { this.tip = tip; }
 
-    public int getKolicina() {
-        return kolicina;
-    }
+    public double getKolicina() { return kolicina; }
 
-    public void setKolicina(int kolicina) {
-        this.kolicina = kolicina;
-    }
+    public void setKolicina(double kolicina) { this.kolicina = kolicina; }
 
     public String getOpis() {
         return opis;
@@ -114,8 +102,6 @@ public class Artikli implements Serializable {
                 ", tip='" + tip + '\'' +
                 ", kolicina=" + kolicina +
                 ", opis='" + opis + '\'' +
-                ", restoran=" + restoran +
-                ", porudzbina=" + porudzbina +
                 '}';
     }
 }

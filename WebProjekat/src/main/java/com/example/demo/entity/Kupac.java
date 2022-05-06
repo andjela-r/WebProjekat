@@ -13,36 +13,35 @@ public class Kupac extends Korisnik implements Serializable {
     @OneToMany(mappedBy = "kupac", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Porudzbina> porudzbina = new HashSet<>();
 
-    @OneToOne
+    @OneToOne //TODO relation = one to many
     @JoinColumn(name = "komentar_id")
     private Komentar komentar;
 
     @Column
-    private int broj_bodova;
+    private int brojBodova;
 
-    @ManyToOne
-    @JoinColumn(name = "tip_kupca_id")
-    private TipKupca tip_kupca;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private TipKupca tipKupca;
 
     //TODO VEZA
 
     public Kupac() {
     }
 
-    public Kupac(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, Date datum_rodjenja, String pol, Uloga uloga, Set<Porudzbina> porudzbina, Komentar komentar, int broj_bodova, TipKupca tip_kupca) {
-        super(id, korisnicko_ime, lozinka, ime, prezime, datum_rodjenja, pol, uloga);
+    public Kupac(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, Date datumRodjenja, String pol, Uloga uloga, Set<Porudzbina> porudzbina, Komentar komentar, int brojBodova, TipKupca tipKupca) {
+        super(id, korisnicko_ime, lozinka, ime, prezime, datumRodjenja, pol, uloga);
         this.porudzbina = porudzbina;
         this.komentar = komentar;
-        this.broj_bodova = broj_bodova;
-        this.tip_kupca = tip_kupca;
+        this.brojBodova = brojBodova;
+        this.tipKupca = tipKupca;
     }
 
-    public int getBroj_bodova() {
-        return broj_bodova;
+    public int getBrojBodova() {
+        return brojBodova;
     }
 
-    public void setBroj_bodova(int broj_bodova) {
-        this.broj_bodova = broj_bodova;
+    public void setBrojBodova(int brojBodova) {
+        this.brojBodova = brojBodova;
     }
 
     public Set<Porudzbina> getPorudzbina() {
@@ -57,12 +56,12 @@ public class Kupac extends Korisnik implements Serializable {
         this.komentar = komentar;
     }
 
-    public void setTip_kupca(TipKupca tip_kupca) {
-        this.tip_kupca = tip_kupca;
+    public void setTipKupca(TipKupca tipKupca) {
+        this.tipKupca = tipKupca;
     }
 
-    public TipKupca getTip_kupca() {
-        return tip_kupca;
+    public TipKupca getTipKupca() {
+        return tipKupca;
     }
 
     public Komentar getKomentar() {
@@ -71,11 +70,11 @@ public class Kupac extends Korisnik implements Serializable {
 
     @Override
     public String toString() {
-        return "Kupac{" +
+        return "Kupac{" + super.toString() +
                 "porudzbina=" + porudzbina +
                 ", komentar=" + komentar +
-                ", broj_bodova=" + broj_bodova +
-                ", tip_kupca=" + tip_kupca +
+                ", broj_bodova=" + brojBodova +
+                ", tip_kupca=" + tipKupca +
                 '}';
     }
 }

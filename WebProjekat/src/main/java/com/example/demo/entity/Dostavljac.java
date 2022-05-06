@@ -9,30 +9,30 @@ import java.util.Set;
 public class Dostavljac extends Korisnik implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY) //Unidirekciona veza, Dostavljac "vidi" Porudzbina, Porudzbina "ne vidi" Dostavljac
-    private Set<Porudzbina> porudzbina_dostavljac;
+    private Set<Porudzbina> porudzbinaDostavljac;
 
 
     public Dostavljac() {
     }
 
 
-    public Dostavljac(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, Date datum_rodjenja, String pol, Uloga uloga, Set<Porudzbina> porudzbina_dostavljac) {
-        super(id, korisnicko_ime, lozinka, ime, prezime, datum_rodjenja, pol, uloga);
-        this.porudzbina_dostavljac = porudzbina_dostavljac;
+    public Dostavljac(Long id, String korisnickoIme, String lozinka, String ime, String prezime, Date datumRodjenja, String pol, Uloga uloga, Set<Porudzbina> porudzbinaDostavljac) {
+        super(id, korisnickoIme, lozinka, ime, prezime, datumRodjenja, pol, uloga);
+        this.porudzbinaDostavljac = porudzbinaDostavljac;
     }
 
-    public Set<Porudzbina> getPorudzbina_dostavljac() {
-        return porudzbina_dostavljac;
+    public Set<Porudzbina> getPorudzbinaDostavljac() {
+        return porudzbinaDostavljac;
     }
 
-    public void setPorudzbina_dostavljac(Set<Porudzbina> porudzbina_dostavljac) {
-        this.porudzbina_dostavljac = porudzbina_dostavljac;
+    public void setPorudzbinaDostavljac(Set<Porudzbina> porudzbina_dostavljac) {
+        this.porudzbinaDostavljac = porudzbina_dostavljac;
     }
 
     @Override
     public String toString() {
-        return "Dostavljac{" +
-                "porudzbina_dostavljac=" + porudzbina_dostavljac +
+        return "Dostavljac{" + super.toString() +
+                "porudzbina_dostavljac=" + porudzbinaDostavljac +
                 '}';
     }
 }
