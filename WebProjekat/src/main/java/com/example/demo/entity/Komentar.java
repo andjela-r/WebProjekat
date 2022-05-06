@@ -10,11 +10,11 @@ public class Komentar implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne //many to one
+    @OneToOne //TODO many to one
     @JoinColumn(name = "porudzbine_kupac_id")
     private Kupac k;
 
-    @OneToOne //many to one
+    @OneToOne //TODO many to one
     @JoinColumn(name = "restoran_id")
     private Restoran restoran;
 
