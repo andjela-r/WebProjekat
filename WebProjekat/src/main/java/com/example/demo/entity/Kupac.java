@@ -15,7 +15,7 @@ public class Kupac extends Korisnik implements Serializable {
 
     @OneToMany (cascade = CascadeType.ALL) //DONE relation = one to many
     @JoinColumn(name = "komentar_id")
-    private Komentar komentar;
+    private Set<Komentar> komentar = new HashSet<>();
 
     @Column
     private int brojBodova;
@@ -28,8 +28,8 @@ public class Kupac extends Korisnik implements Serializable {
     public Kupac() {
     }
 
-    public Kupac(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, Date datumRodjenja, Pol pol, Uloga uloga, Set<Porudzbina> porudzbina, Komentar komentar, int brojBodova, TipKupca tipKupca) {
-        super(id, korisnicko_ime, lozinka, ime, prezime, datumRodjenja, pol, uloga);
+    public Kupac(Long id, String korisnickoIme, String lozinka, String ime, String prezime, Date datumRodjenja, Pol pol, Uloga uloga, Set<Porudzbina> porudzbina, Set<Komentar> komentar, int brojBodova, TipKupca tipKupca) {
+        super(id, korisnickoIme, lozinka, ime, prezime, datumRodjenja, pol, uloga);
         this.porudzbina = porudzbina;
         this.komentar = komentar;
         this.brojBodova = brojBodova;
@@ -52,10 +52,6 @@ public class Kupac extends Korisnik implements Serializable {
         this.porudzbina = porudzbina;
     }
 
-    public void setKomentar(Komentar komentar) {
-        this.komentar = komentar;
-    }
-
     public void setTipKupca(TipKupca tipKupca) {
         this.tipKupca = tipKupca;
     }
@@ -64,8 +60,12 @@ public class Kupac extends Korisnik implements Serializable {
         return tipKupca;
     }
 
-    public Komentar getKomentar() {
+    public Set<Komentar> getKomentar() {
         return komentar;
+    }
+
+    public void setKomentar(Set<Komentar> komentar) {
+        this.komentar = komentar;
     }
 
     @Override

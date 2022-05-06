@@ -31,14 +31,12 @@ public class Porudzbina implements Serializable {
     /*@ManyToMany(mappedBy = "porudzbina")
     private Set<Artikli> artikli = new HashSet<>();*/
 
-    @ManyToMany //TODO stavka porudbine(klasa) one to many, kolicina i artikal (many to one)
-    @JoinTable(name = "imaArtikle",
-            joinColumns = @JoinColumn(name = "porudzbina_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "artikli_id", referencedColumnName = "id"))
-    private Set<Artikli> artikli = new HashSet<>();
+    @OneToMany (cascade = CascadeType.ALL)
+    @JoinColumn(name = "stavka_id")
+    private Set<StavkaPorudzbine> stavka = new HashSet<>();
 
-    @ManyToMany //TODO many to one
-    private Set<Restoran> restoran = new HashSet<>();
+    @ManyToOne //Done many to one
+    private Restoran restoran;
 
     @ManyToOne
     @JoinColumn(name = "dostavljac_id")
@@ -64,18 +62,18 @@ public class Porudzbina implements Serializable {
         return kupac;
     }
 
-    public Porudzbina(UUID id, Set<Artikli> artikli, Set<Restoran> restoran, Dostavljac dostavljac, Date datum, double cena, STATUS status, Kupac kupac) {
+    public Porudzbina() {
+    }
+
+    public Porudzbina(UUID id, Set<StavkaPorudzbine> stavka, Restoran restoran, Dostavljac dostavljac, Date datum, double cena, STATUS status, Kupac kupac) {
         this.id = id;
-        this.artikli = artikli;
+        this.stavka = stavka;
         this.restoran = restoran;
         this.dostavljac = dostavljac;
         this.datum = datum;
         this.cena = cena;
         this.status = status;
         this.kupac = kupac;
-    }
-
-    public Porudzbina() {
     }
 
     public UUID getId() {
@@ -86,28 +84,24 @@ public class Porudzbina implements Serializable {
         this.id = id;
     }
 
-    public Set<Artikli> getArtikli() {
-        return artikli;
+    public Set<StavkaPorudzbine> getStavka() {
+        return stavka;
     }
 
-    public void setArtikli(Set<Artikli> artikli) {
-        this.artikli = artikli;
+    public void setStavka(Set<StavkaPorudzbine> stavka) {
+        this.stavka = stavka;
     }
 
-    public Set<Restoran> getRestoran() {
+    public Restoran getRestoran() {
         return restoran;
     }
 
-    public void setRestoran(Set<Restoran> restoran) {
+    public void setRestoran(Restoran restoran) {
         this.restoran = restoran;
     }
 
     public void setDostavljac(Dostavljac dostavljac) {
         this.dostavljac = dostavljac;
-    }
-
-    public void setKupac(Kupac kupac) {
-        this.kupac = kupac;
     }
 
     public Date getDatum() {
@@ -134,11 +128,15 @@ public class Porudzbina implements Serializable {
         this.status = status;
     }
 
+    public void setKupac(Kupac kupac) {
+        this.kupac = kupac;
+    }
+
     @Override
     public String toString() {
         return "Porudzbina{" +
                 "id=" + id +
-                ", artikli=" + artikli +
+                ", stavka=" + stavka +
                 ", restoran=" + restoran +
                 ", dostavljac=" + dostavljac +
                 ", datum=" + datum +
