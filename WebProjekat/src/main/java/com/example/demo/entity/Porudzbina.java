@@ -65,8 +65,7 @@ public class Porudzbina implements Serializable {
     public Porudzbina() {
     }
 
-    public Porudzbina(UUID id, Set<StavkaPorudzbine> stavka, Restoran restoran, Dostavljac dostavljac, Date datum, double cena, STATUS status, Kupac kupac) {
-        this.id = id;
+    public Porudzbina(Set<StavkaPorudzbine> stavka, Restoran restoran, Dostavljac dostavljac, Date datum, double cena, STATUS status, Kupac kupac) {
         this.stavka = stavka;
         this.restoran = restoran;
         this.dostavljac = dostavljac;

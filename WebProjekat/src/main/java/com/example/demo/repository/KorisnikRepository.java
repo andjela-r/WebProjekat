@@ -4,31 +4,27 @@ import com.example.demo.entity.Korisnik;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
-    //OVDE UPITI
-
-    /*
-        Spring na osnovu imena metode kreira upit za bazu.
-
-        Traži sve zaposlene (employee) koji imaju poziciju koja se prosledjuje ovoj metodi kao string (String position).
-        Sortira sve koje je pronašao po imenu i vraća kolekciju zaposlenih.
-
-    List<Employee> findAllByPositionOrderByFirstName(String position);
-
-        Traži sve zaposlene po imenu ili prezimenu.
-
-    List<Employee> findByFirstNameOrLastName(String firstName, String lastName);
+    List<Korisnik> findAll();
+    Korisnik getById(Long aLong);
+    //Korisnik save(Korisnik korisnik);
+    Korisnik getByKorisnickoIme(String username);
 
 
-        Traži sve zaposlene po imenu, ignorišu se mala i velika slova.
+//    boolean updateKorisnik(
+//            Long id,
+//            String korisnickoIme,
+//            String lozinka,
+//            String ime,
+//            String prezime,
+//            Date datumRodjenja,
+//            Pol pol,
+//            Uloga uloga);
+//    boolean deleteKorisnik(Long id);
 
-    List<Employee> findByFirstNameIgnoreCase(String firstName);
-
-
-        Traži sve zaposlene po nazivu departmana.
-
-    List<Employee> findByDepartmentName(String departmentName); */
 }
 
 

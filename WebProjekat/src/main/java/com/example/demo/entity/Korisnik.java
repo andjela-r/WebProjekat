@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -35,8 +37,7 @@ public class Korisnik implements Serializable {
     public Korisnik() {
     }
 
-    public Korisnik(Long id, String korisnickoIme, String lozinka, String ime, String prezime, Date datumRodjenja, Pol pol, Uloga uloga) {
-        this.id = id;
+    public Korisnik(String korisnickoIme, String lozinka, String ime, String prezime, Date datumRodjenja, Pol pol, Uloga uloga) {
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
         this.ime = ime;

@@ -31,8 +31,7 @@ public class Lokacija implements Serializable {
         return restoran;
     }*/
 
-    public Lokacija(Long id, double duzina, double sirina, String adresa) {
-        this.id = id;
+    public Lokacija(double duzina, double sirina, String adresa) {
         this.duzina = duzina;
         this.sirina = sirina;
         this.adresa = adresa;

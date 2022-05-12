@@ -29,8 +29,7 @@ public class Komentar implements Serializable {
     public Komentar() {
     }
 
-    public Komentar(Long id, Kupac k, Restoran restoran, String tekst, int ocena) {
-        this.id = id;
+    public Komentar(Kupac k, Restoran restoran, String tekst, int ocena) {
         this.k = k;
         this.restoran = restoran;
         this.tekst = tekst;

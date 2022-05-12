@@ -25,8 +25,7 @@ public class TipKupca implements Serializable {
     public TipKupca() {
     }
 
-    public TipKupca(Long id, String ime, double popust, double trazeniBrojBodova) {
-        this.id = id;
+    public TipKupca(String ime, double popust, double trazeniBrojBodova) {
         this.ime = ime;
         this.popust = popust;
         this.trazeniBrojBodova = trazeniBrojBodova;
