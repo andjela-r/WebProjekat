@@ -56,15 +56,19 @@ public class KorisnikController {
                 registerDto.getUsername(),
                 registerDto.getPassword(),
                 registerDto.getIme(),
-                registerDto.getPrezime());
+                registerDto.getPrezime(),
+                registerDto.getDatumRodjenja(),
+                registerDto.getPol()
+        );
+
         session.setAttribute("korisnik", newKorisnik);
         korisnikService.save(newKorisnik);
         return ResponseEntity.ok("Uspesno kreiran nalog!");
-
+    }
 
 //    @PostMapping("/api/korisnik/napravi")
 //    public String createKorisnik(@RequestBody KorisnikDTO korisnik, HttpSession session){
 //        korisnikService.save(korisnik);
 //        return ResponseEntity.ok("Korisnik kreiran.");
-    }
+
 }

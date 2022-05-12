@@ -13,15 +13,19 @@ public class RegisterDto {
     private String prezime;
     private String username;
     private String password;
+    private Date datumRodjenja;
+    private Pol pol;
 
     public RegisterDto() {
     }
 
-    public RegisterDto(String ime, String prezime, String username, String password) {
+    public RegisterDto(String ime, String prezime, String username, String password, Date datumRodjenja, Pol pol) {
         this.ime = ime;
         this.prezime = prezime;
         this.username = username;
         this.password = password;
+        this.datumRodjenja = datumRodjenja;
+        this.pol = pol;
     }
 
     public String getIme() {
@@ -56,7 +60,15 @@ public class RegisterDto {
         this.password = password;
     }
 
-//    public Korisnik toKorisnik(){
+    public Date getDatumRodjenja() { return datumRodjenja; }
+
+    public void setDatumRodjenja(Date datumRodjenja) { this.datumRodjenja = datumRodjenja; }
+
+    public Pol getPol() { return pol; }
+
+    public void setPol(Pol pol) { this.pol = pol; }
+
+    //    public Korisnik toKorisnik(){
 //        Korisnik korisnik = new Korisnik(
 //                0L,
 //                this.username,

@@ -10,7 +10,6 @@ import java.util.List;
 public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
     List<Korisnik> findAll();
     Korisnik getById(Long aLong);
-    //Korisnik save(Korisnik korisnik);
     Korisnik getByKorisnickoIme(String username);
     boolean existsByKorisnickoIme(String username);
 
