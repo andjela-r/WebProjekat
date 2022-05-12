@@ -37,7 +37,7 @@ public class KorisnikController {
         if (loggedKorisnik == null)
             return new ResponseEntity<>("Korisnik ne postoji!", HttpStatus.NOT_FOUND);
 
-        session.setAttribute("employee", loggedKorisnik);
+        session.setAttribute("korisnik", loggedKorisnik);
         return ResponseEntity.ok("Uspesno logovanje!");
     }
 
@@ -64,6 +64,17 @@ public class KorisnikController {
         session.setAttribute("korisnik", newKorisnik);
         korisnikService.save(newKorisnik);
         return ResponseEntity.ok("Uspesno kreiran nalog!");
+    }
+
+    @PostMapping("api/logout")
+    public ResponseEntity Logout(HttpSession session){
+        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
+
+        if (loggedKorisnik == null)
+            return new ResponseEntity("Forbidden", HttpStatus.FORBIDDEN);
+
+        session.invalidate();
+        return new ResponseEntity("Uspesno ste izlogovani!", HttpStatus.OK);
     }
 
 //    @PostMapping("/api/korisnik/napravi")
