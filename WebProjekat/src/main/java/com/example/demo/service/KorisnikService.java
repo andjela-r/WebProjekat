@@ -1,13 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Korisnik;
-import com.example.demo.entity.Pol;
 import com.example.demo.entity.Uloga;
 import com.example.demo.repository.KorisnikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,13 +26,24 @@ public class KorisnikService {
             return null;
         return  korisnik;
     }
+    public boolean postoji(String username){
+        return korisnikRepository.existsByKorisnickoIme(username);
+    }
 
-//    public Korisnik save(KorisnikDTO korisnik){
-//        //
-////              Korisnik korisnikEntitet = new Korisnik (premapirane stvari + id + uloga)
-//                return korisnikRepository.save(korisnikEntitet);
+    public Korisnik register(String username, String pass, String ime, String prezime){
+        Korisnik korisnik = new Korisnik();
+        korisnik.setUloga(Uloga.KUPAC);
+        korisnik.setIme(ime);
+        korisnik.setPrezime(prezime);
+        korisnik.setKorisnickoIme(username);
+        korisnik.setLozinka(pass);
+        return korisnik;
+    }
 
-//    }
+    public Korisnik save(Korisnik newKorisnik){
+              return korisnikRepository.save(newKorisnik);
+
+    }
 
 //    String korisnickoIme,
 //    String lozinka,

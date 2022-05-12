@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.awt.*;
 import java.util.List;
 
 @RestController
@@ -32,19 +31,40 @@ public class KorisnikController {
     public ResponseEntity<String> login (@RequestBody LoginDto loginDto, HttpSession session){
         // proverimo da li su podaci validni
         if(loginDto.getUsername().isEmpty() || loginDto.getPassword().isEmpty())
-            return new ResponseEntity("Invalid login data", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("Lose uneti kredencijali.", HttpStatus.BAD_REQUEST);
 
         Korisnik loggedKorisnik = korisnikService.login(loginDto.getUsername(), loginDto.getPassword());
         if (loggedKorisnik == null)
-            return new ResponseEntity<>("User does not exist!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Korisnik ne postoji!", HttpStatus.NOT_FOUND);
 
         session.setAttribute("employee", loggedKorisnik);
-        return ResponseEntity.ok("Successfully logged in!");
+        return ResponseEntity.ok("Uspesno logovanje!");
     }
+
+    @PostMapping("/api/register")
+    public ResponseEntity<String> register (@RequestBody RegisterDto registerDto, HttpSession session){
+
+        if(registerDto.getUsername().isEmpty() || registerDto.getPassword().isEmpty()
+                || registerDto.getIme().isEmpty() || registerDto.getPrezime().isEmpty())
+            return new ResponseEntity("Nisu uneti neophodni podaci.", HttpStatus.BAD_REQUEST);
+
+        if(korisnikService.postoji(registerDto.getUsername())){
+            return new ResponseEntity<>("Korisnicko ime je zauzeto!", HttpStatus.BAD_REQUEST);
+      }
+
+        Korisnik newKorisnik = korisnikService.register(
+                registerDto.getUsername(),
+                registerDto.getPassword(),
+                registerDto.getIme(),
+                registerDto.getPrezime());
+        session.setAttribute("korisnik", newKorisnik);
+        korisnikService.save(newKorisnik);
+        return ResponseEntity.ok("Uspesno kreiran nalog!");
+
 
 //    @PostMapping("/api/korisnik/napravi")
 //    public String createKorisnik(@RequestBody KorisnikDTO korisnik, HttpSession session){
 //        korisnikService.save(korisnik);
-//        return ("Korisnik kreiran.");
-//    }
+//        return ResponseEntity.ok("Korisnik kreiran.");
+    }
 }
