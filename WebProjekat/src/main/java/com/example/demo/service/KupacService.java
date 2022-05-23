@@ -5,10 +5,12 @@ import com.example.demo.entity.Pol;
 import com.example.demo.entity.Uloga;
 import com.example.demo.repository.KupacRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class KupacService {
 
     @Autowired

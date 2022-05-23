@@ -107,6 +107,17 @@ public class DatabaseConfiguration {
                 Uloga.KUPAC
         );
         korisnikRepository.save(korisnik3);
+
+        Kupac kupac = new Kupac(
+                "djolence", "1134",
+                "Djole", "Djokic",
+                new Date(2000, Calendar.OCTOBER, 7 ),
+                Pol.Muski,
+                Uloga.KUPAC
+        );
+        kupacRepository.save(kupac);
+
+
         Lokacija lokacija = new Lokacija(
                 11.4, 13.7,
                 "Nikole Pasica 13"

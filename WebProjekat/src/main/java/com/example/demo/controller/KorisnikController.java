@@ -30,19 +30,19 @@ public class KorisnikController {
         return ResponseEntity.ok(korisnikService.getById(id));
     }
 
-//    @PostMapping("/api/login")
-//    public ResponseEntity<String> login (@RequestBody LoginDto loginDto, HttpSession session){
-//        // proverimo da li su podaci validni
-//        if(loginDto.getUsername().isEmpty() || loginDto.getPassword().isEmpty())
-//            return new ResponseEntity("Lose uneti kredencijali.", HttpStatus.BAD_REQUEST);
-//
-//        Korisnik loggedKorisnik = korisnikService.login(loginDto.getUsername(), loginDto.getPassword());
-//        if (loggedKorisnik == null)
-//            return new ResponseEntity<>("Korisnik ne postoji!", HttpStatus.NOT_FOUND);
-//
-//        session.setAttribute("korisnik", loggedKorisnik);
-//        return ResponseEntity.ok("Uspesno logovanje!");
-//    }
+    @PostMapping("/api/login")
+    public ResponseEntity<String> login (@RequestBody LoginDto loginDto, HttpSession session){
+        // proverimo da li su podaci validni
+        if(loginDto.getUsername().isEmpty() || loginDto.getPassword().isEmpty())
+            return new ResponseEntity("Lose uneti kredencijali.", HttpStatus.BAD_REQUEST);
+
+        Korisnik loggedKorisnik = korisnikService.login(loginDto.getUsername(), loginDto.getPassword());
+        if (loggedKorisnik == null)
+            return new ResponseEntity<>("Korisnik ne postoji!", HttpStatus.NOT_FOUND);
+
+        session.setAttribute("korisnik", loggedKorisnik);
+        return ResponseEntity.ok("Uspesno logovanje!");
+    }
 //
 //    @PostMapping("/api/register")
 //    public ResponseEntity<String> register (@RequestBody RegisterDto registerDto, HttpSession session){
@@ -120,20 +120,14 @@ public class KorisnikController {
 //        return ResponseEntity.ok("Uspesno kreiran nalog za menadzera!");
 //    }
 //
-//    @PostMapping("api/logout")
-//    public ResponseEntity Logout(HttpSession session){
-//        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
-//
-//        if (loggedKorisnik == null)
-//            return new ResponseEntity("Forbidden", HttpStatus.FORBIDDEN);
-//
-//        session.invalidate();
-//        return new ResponseEntity("Uspesno ste izlogovani!", HttpStatus.OK);
-//    }
+    @PostMapping("api/logout")
+    public ResponseEntity Logout(HttpSession session){
+        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
 
-//    @PostMapping("/api/korisnik/napravi")
-//    public String createKorisnik(@RequestBody KorisnikDTO korisnik, HttpSession session){
-//        korisnikService.save(korisnik);
-//        return ResponseEntity.ok("Korisnik kreiran.");
+        if (loggedKorisnik == null)
+            return new ResponseEntity("Forbidden", HttpStatus.FORBIDDEN);
 
+        session.invalidate();
+        return new ResponseEntity("Uspesno ste izlogovani!", HttpStatus.OK);
+    }
 }

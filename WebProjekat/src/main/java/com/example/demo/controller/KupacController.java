@@ -8,42 +8,16 @@ import com.example.demo.service.KupacService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@RestController
 public class KupacController {
 
     @Autowired
     private KupacService kupacService;
-
-    @GetMapping("/api/kupci")
-    public ResponseEntity<List<Kupac>> getAll(HttpSession session){
-        return ResponseEntity.ok(kupacService.findAll());
-    }
-
-    @GetMapping("/api/kupac/{id}")
-    public ResponseEntity<Kupac> getById(@PathVariable(name = "id") Long id, HttpSession session){
-        return ResponseEntity.ok(kupacService.getById(id));
-    }
-
-    @PostMapping("/api/login")
-    public ResponseEntity<String> login (@RequestBody LoginDto loginDto, HttpSession session){
-        // proverimo da li su podaci validni
-        if(loginDto.getUsername().isEmpty() || loginDto.getPassword().isEmpty())
-            return new ResponseEntity("Lose uneti kredencijali.", HttpStatus.BAD_REQUEST);
-
-        Korisnik loggedKupac = kupacService.login(loginDto.getUsername(), loginDto.getPassword());
-        if (loggedKupac == null)
-            return new ResponseEntity<>("Kupac ne postoji!", HttpStatus.NOT_FOUND);
-
-        session.setAttribute("kupac", loggedKupac);
-        return ResponseEntity.ok("Uspesno logovanje!");
-    }
 
     @PostMapping("/api/register")
     public ResponseEntity<String> register (@RequestBody RegisterDto registerDto, HttpSession session){
@@ -70,15 +44,6 @@ public class KupacController {
         return ResponseEntity.ok("Uspesno kreiran nalog!");
     }
 
-    @PostMapping("api/logout")
-    public ResponseEntity Logout(HttpSession session){
-        Kupac loggedKupac = (Kupac) session.getAttribute("kupac");
 
-        if (loggedKupac == null)
-            return new ResponseEntity("Forbidden", HttpStatus.FORBIDDEN);
-
-        session.invalidate();
-        return new ResponseEntity("Uspesno ste izlogovani!", HttpStatus.OK);
-    }
 
 }
