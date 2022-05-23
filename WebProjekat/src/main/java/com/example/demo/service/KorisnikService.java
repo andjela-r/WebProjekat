@@ -1,8 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Korisnik;
-import com.example.demo.entity.Pol;
-import com.example.demo.entity.Uloga;
+import com.example.demo.entity.*;
 import com.example.demo.repository.KorisnikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +45,34 @@ public class KorisnikService {
 
     public Korisnik save(Korisnik newKorisnik){
               return korisnikRepository.save(newKorisnik);
+
+    }
+
+    public Menadzer createMenadzer(String username, String pass, String ime, String prezime, Date datumRodjenja, Pol pol, Restoran restoran){
+        Menadzer menadzer = new Menadzer();
+        menadzer.setUloga(Uloga.MENADZER);
+        menadzer.setIme(ime);
+        menadzer.setPrezime(prezime);
+        menadzer.setKorisnickoIme(username);
+        menadzer.setLozinka(pass);
+        menadzer.setDatumRodjenja(datumRodjenja);
+        menadzer.setPol(pol);
+        menadzer.setRestoran(restoran);
+
+        return menadzer;
+    }
+
+    public Dostavljac createDostavljac(String username, String pass, String ime, String prezime, Date datumRodjenja, Pol pol){
+        Dostavljac dostavljac = new Dostavljac();
+        dostavljac.setUloga(Uloga.DOSTAVLJAC);
+        dostavljac.setIme(ime);
+        dostavljac.setPrezime(prezime);
+        dostavljac.setKorisnickoIme(username);
+        dostavljac.setLozinka(pass);
+        dostavljac.setDatumRodjenja(datumRodjenja);
+        dostavljac.setPol(pol);
+
+        return dostavljac;
 
     }
 

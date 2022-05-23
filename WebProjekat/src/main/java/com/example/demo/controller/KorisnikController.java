@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.LoginDto;
+import com.example.demo.dto.MenadzerDto;
 import com.example.demo.dto.RegisterDto;
+import com.example.demo.entity.Dostavljac;
 import com.example.demo.entity.Korisnik;
+import com.example.demo.entity.Menadzer;
 import com.example.demo.service.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,6 +67,57 @@ public class KorisnikController {
         session.setAttribute("korisnik", newKorisnik);
         korisnikService.save(newKorisnik);
         return ResponseEntity.ok("Uspesno kreiran nalog!");
+    }
+
+    @PostMapping("/api/add-menadzer")
+    public ResponseEntity<String> addMenadzer (@RequestBody MenadzerDto menadzerDto, HttpSession session){
+
+        if(menadzerDto.getUsername().isEmpty() || menadzerDto.getPassword().isEmpty()
+                || menadzerDto.getIme().isEmpty() || menadzerDto.getPrezime().isEmpty())
+            return new ResponseEntity("Nisu uneti neophodni podaci.", HttpStatus.BAD_REQUEST);
+
+        if(korisnikService.postoji(menadzerDto.getUsername())){
+            return new ResponseEntity<>("Korisnicko ime je zauzeto!", HttpStatus.BAD_REQUEST);
+        }
+
+        Menadzer newMenadzer = korisnikService.createMenadzer(
+                menadzerDto.getUsername(),
+                menadzerDto.getPassword(),
+                menadzerDto.getIme(),
+                menadzerDto.getPrezime(),
+                menadzerDto.getDatumRodjenja(),
+                menadzerDto.getPol(),
+                menadzerDto.getRestoran()
+        );
+
+        session.setAttribute("korisnik", newMenadzer);
+        korisnikService.save(newMenadzer);
+        return ResponseEntity.ok("Uspesno kreiran nalog za menadzera!");
+    }
+
+    @PostMapping("/api/add-dostavljac")
+    public ResponseEntity<String> addDostavljac (@RequestBody RegisterDto registerDto, HttpSession session){
+
+        if(registerDto.getUsername().isEmpty() || registerDto.getPassword().isEmpty()
+                || registerDto.getIme().isEmpty() || registerDto.getPrezime().isEmpty())
+            return new ResponseEntity("Nisu uneti neophodni podaci.", HttpStatus.BAD_REQUEST);
+
+        if(korisnikService.postoji(registerDto.getUsername())){
+            return new ResponseEntity<>("Korisnicko ime je zauzeto!", HttpStatus.BAD_REQUEST);
+        }
+
+        Dostavljac newDostavljac = korisnikService.createDostavljac(
+                registerDto.getUsername(),
+                registerDto.getPassword(),
+                registerDto.getIme(),
+                registerDto.getPrezime(),
+                registerDto.getDatumRodjenja(),
+                registerDto.getPol()
+        );
+
+        session.setAttribute("korisnik", newDostavljac);
+        korisnikService.save(newDostavljac);
+        return ResponseEntity.ok("Uspesno kreiran nalog za menadzera!");
     }
 
     @PostMapping("api/logout")
