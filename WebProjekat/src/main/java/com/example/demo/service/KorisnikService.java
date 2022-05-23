@@ -27,9 +27,6 @@ public class KorisnikService {
             return null;
         return  korisnik;
     }
-    public boolean postoji(String username){
-        return korisnikRepository.existsByKorisnickoIme(username);
-    }
 
     public Korisnik register(String username, String pass, String ime, String prezime, Date datumRodjenja, Pol pol){
         Korisnik korisnik = new Korisnik();
