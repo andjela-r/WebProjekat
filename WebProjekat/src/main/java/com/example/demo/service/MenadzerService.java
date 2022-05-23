@@ -1,9 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Menadzer;
-import com.example.demo.entity.Pol;
-import com.example.demo.entity.Restoran;
-import com.example.demo.entity.Uloga;
+import com.example.demo.entity.*;
 import com.example.demo.repository.MenadzerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +25,11 @@ public class MenadzerService {
         menadzer.setRestoran(restoran);
 
         return menadzer;
+    }
+
+    public Menadzer save(Menadzer newMenadzer){
+        return menadzerRepository.save(newMenadzer);
+
     }
 
 }

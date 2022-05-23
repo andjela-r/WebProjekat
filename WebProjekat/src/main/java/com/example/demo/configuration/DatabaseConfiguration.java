@@ -124,6 +124,12 @@ public class DatabaseConfiguration {
         );
         lokacijaRepository.save(lokacija);
 
+        Restoran restoran = new Restoran();
+        restoran.setLokacija(lokacija);
+        restoran.setNaziv("Tortilla Casa");
+        restoran.setTip("Meksicka hrana");
+        restoranRepository.save(restoran);
+
         Artikli artikli = new Artikli(
                 "Pileca kobasica",
                 120.99,
