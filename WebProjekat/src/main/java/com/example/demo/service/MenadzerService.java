@@ -18,29 +18,7 @@ public class MenadzerService {
     @Autowired
     private RestoranRepository restoranRepository;
 
-    public Menadzer createMenadzer(MenadzerDto menadzerDto){
-        Restoran restoran = restoranRepository.getById(menadzerDto.getIdRestoran());
-        if(restoran == null){
-            return null;
-        }
-        Menadzer menadzer = new Menadzer(menadzerDto.getUsername(),
-                                        menadzerDto.getPassword(),
-                                        menadzerDto.getIme(),
-                                        menadzerDto.getPrezime(),
-                                        menadzerDto.getDatumRodjenja(),
-                                        menadzerDto.getPol(),
-                                        Uloga.MENADZER,
-                                        restoran);
-        if(menadzerRepository.existsByKorisnickoIme(menadzer.getKorisnickoIme())){
-            return null; //menadzer postoji
-        }
-        save(menadzer);
-        return menadzer;
-    }
 
-    public Menadzer save(Menadzer newMenadzer){
-        return menadzerRepository.save(newMenadzer);
 
-    }
 
 }

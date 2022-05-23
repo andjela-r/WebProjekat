@@ -18,22 +18,5 @@ public class MenadzerController {
     @Autowired
     private MenadzerService menadzerService;
 
-    @PostMapping("/api/add-menadzer")
-    public ResponseEntity<String> addMenadzer (@RequestBody MenadzerDto menadzerDto, HttpSession session){
 
-        if(menadzerDto.getUsername().isEmpty() || menadzerDto.getPassword().isEmpty()
-                || menadzerDto.getIme().isEmpty() || menadzerDto.getPrezime().isEmpty()
-                || menadzerDto.getDatumRodjenja().toString().isEmpty() || menadzerDto.getPol().toString().isEmpty()
-                || menadzerDto.getIdRestoran().toString().isEmpty())
-            return new ResponseEntity("Nisu uneti neophodni podaci.", HttpStatus.BAD_REQUEST);
-
-        Menadzer newMenadzer = menadzerService.createMenadzer(menadzerDto);
-        if(newMenadzer == null){
-            return new ResponseEntity("Proverite korisnicko ime i restoran, nesto nije bas dobro :'(", HttpStatus.I_AM_A_TEAPOT);
-            //kako resiti?
-        }
-
-        session.setAttribute("korisnik", newMenadzer);
-        return ResponseEntity.ok("Uspesno kreiran nalog za menadzera!");
-    }
 }

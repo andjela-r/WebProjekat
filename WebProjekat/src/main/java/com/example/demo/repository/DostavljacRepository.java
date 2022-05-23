@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DostavljacRepository extends JpaRepository<Dostavljac, Long>{
+    boolean existsByKorisnickoIme(String username);
 }

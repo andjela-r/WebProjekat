@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.DostavljacDto;
 import com.example.demo.entity.Dostavljac;
 import com.example.demo.entity.Pol;
 import com.example.demo.entity.Uloga;
@@ -15,17 +16,5 @@ public class DostavljacService {
     @Autowired
     private DostavljacRepository dostavljacRepository;
 
-    public Dostavljac createDostavljac(String username, String pass, String ime, String prezime, Date datumRodjenja, Pol pol){
-        Dostavljac dostavljac = new Dostavljac();
-        dostavljac.setUloga(Uloga.DOSTAVLJAC);
-        dostavljac.setIme(ime);
-        dostavljac.setPrezime(prezime);
-        dostavljac.setKorisnickoIme(username);
-        dostavljac.setLozinka(pass);
-        dostavljac.setDatumRodjenja(datumRodjenja);
-        dostavljac.setPol(pol);
 
-        return dostavljac;
-
-    }
 }
