@@ -43,7 +43,27 @@ public class KupacController {
         kupacService.save(newKupac);
         return ResponseEntity.ok("Uspesno kreiran nalog!");
     }
+    /*@RequestMapping(value="/api/update", method = RequestMethod.PUT)
+    public void getKupac(@PathVariable String id, @RequestBody Kupac kupac){
+        kupacService.updateKupac(id,kupac);
+    }*/
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Kupac> updateKupac(@PathVariable("id") long id, @RequestBody Kupac kupac) {
+        System.out.println("Updating User " + id);
 
+        Kupac currentUser = kupacService.getById(id);
 
+        if (currentUser==null) {
+            System.out.println("User with id " + id + " not found");
+            return new ResponseEntity<Kupac>(HttpStatus.NOT_FOUND);
+        }
+
+        currentUser.setIme(kupac.getIme());
+        currentUser.setPrezime(kupac.getPrezime());
+        currentUser.setDatumRodjenja(kupac.getDatumRodjenja());
+
+        kupacService.updateKupac(currentUser);
+        return new ResponseEntity<Kupac>(currentUser, HttpStatus.OK);
+    }
 
 }
