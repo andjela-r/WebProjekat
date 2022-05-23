@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.RegisterDto;
 import com.example.demo.entity.Kupac;
 import com.example.demo.entity.Pol;
 import com.example.demo.entity.Uloga;
@@ -18,33 +19,28 @@ public class KupacService {
     @Autowired
     private KupacRepository kupacRepository;
 
-    public Kupac getById(Long aLong) {
-        return kupacRepository.getOne(aLong);
+    public Kupac getById(Long id) {
+
+        return kupacRepository.getOne(id);
     }
 
     public List<Kupac> findAll() {
+
         return kupacRepository.findAll();
     }
 
-    public Kupac login(String username, String password) {
-        Kupac kupac = kupacRepository.getByKorisnickoIme(username);
-        if(kupac == null || !kupac.getLozinka().equals(password))
-            return null;
-        return  kupac;
-    }
-    public boolean postoji(String username){
-        return kupacRepository.existsByKorisnickoIme(username);
-    }
-
-    public Kupac register(String username, String pass, String ime, String prezime, Date datumRodjenja, Pol pol){
-        Kupac kupac = new Kupac();
-        kupac.setUloga(Uloga.KUPAC);
-        kupac.setIme(ime);
-        kupac.setPrezime(prezime);
-        kupac.setKorisnickoIme(username);
-        kupac.setLozinka(pass);
-        kupac.setDatumRodjenja(datumRodjenja);
-        kupac.setPol(pol);
+    public Kupac register (RegisterDto kupacDto){
+        Kupac kupac = new Kupac(kupacDto.getUsername(),
+                                kupacDto.getPassword(),
+                                kupacDto.getIme(),
+                                kupacDto.getPrezime(),
+                                kupacDto.getDatumRodjenja(),
+                                kupacDto.getPol(),
+                                Uloga.KUPAC);
+        if(kupacRepository.existsByKorisnickoIme(kupac.getKorisnickoIme())){
+            return null; //kupac postoji
+        }
+        kupacRepository.save(kupac);
         return kupac;
     }
 
@@ -52,8 +48,4 @@ public class KupacService {
         kupacRepository.save(kupac);
     }
 
-    public Kupac save(Kupac newKorisnik){
-        return kupacRepository.save(newKorisnik);
-
-    }
 }

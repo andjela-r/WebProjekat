@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MenadzerRepository extends JpaRepository<Menadzer, Long>{
-
+    boolean existsByKorisnickoIme(String username);
 }

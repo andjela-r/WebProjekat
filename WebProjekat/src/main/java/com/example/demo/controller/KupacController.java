@@ -23,31 +23,23 @@ public class KupacController {
     public ResponseEntity<String> register (@RequestBody RegisterDto registerDto, HttpSession session){
 
         if(registerDto.getUsername().isEmpty() || registerDto.getPassword().isEmpty()
-                || registerDto.getIme().isEmpty() || registerDto.getPrezime().isEmpty())
+                || registerDto.getIme().isEmpty() || registerDto.getPrezime().isEmpty()
+                || registerDto.getDatumRodjenja().toString().isEmpty() || registerDto.getPol().toString().isEmpty())
             return new ResponseEntity("Nisu uneti neophodni podaci.", HttpStatus.BAD_REQUEST);
 
-        if(kupacService.postoji(registerDto.getUsername())){
-            return new ResponseEntity<>("Kupac ime je zauzeto!", HttpStatus.BAD_REQUEST);
+        Kupac newKupac = kupacService.register(registerDto);
+        if (newKupac == null){
+            return new ResponseEntity("Korisnicko ime je zauzeto!", HttpStatus.BAD_REQUEST);
         }
-
-        Kupac newKupac = kupacService.register(
-                registerDto.getUsername(),
-                registerDto.getPassword(),
-                registerDto.getIme(),
-                registerDto.getPrezime(),
-                registerDto.getDatumRodjenja(),
-                registerDto.getPol()
-        );
-
         session.setAttribute("korisnik", newKupac);
-        kupacService.save(newKupac);
         return ResponseEntity.ok("Uspesno kreiran nalog!");
     }
+
     /*@RequestMapping(value="/api/update", method = RequestMethod.PUT)
     public void getKupac(@PathVariable String id, @RequestBody Kupac kupac){
         kupacService.updateKupac(id,kupac);
     }*/
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/api/update/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Kupac> updateKupac(@PathVariable("id") long id, @RequestBody Kupac kupac) {
         System.out.println("Updating User " + id);
 
