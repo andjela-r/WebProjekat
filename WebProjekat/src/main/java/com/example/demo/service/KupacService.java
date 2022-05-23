@@ -6,6 +6,8 @@ import com.example.demo.entity.Uloga;
 import com.example.demo.repository.KupacRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Date;
 import java.util.List;
@@ -44,6 +46,10 @@ public class KupacService {
         kupac.setDatumRodjenja(datumRodjenja);
         kupac.setPol(pol);
         return kupac;
+    }
+
+    public void updateKupac(Kupac kupac){
+        kupacRepository.save(kupac);
     }
 
     public Kupac save(Kupac newKorisnik){
