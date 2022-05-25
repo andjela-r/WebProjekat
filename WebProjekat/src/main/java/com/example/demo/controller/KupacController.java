@@ -41,18 +41,21 @@ public class KupacController {
     }*/
     @RequestMapping(value = "/api/update/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Kupac> updateKupac(@PathVariable("id") long id, @RequestBody Kupac kupac) {
-        System.out.println("Updating User " + id);
+        System.out.println("Azuriras korsinika sa id:  " + id);
 
         Kupac currentUser = kupacService.getById(id);
 
         if (currentUser==null) {
-            System.out.println("User with id " + id + " not found");
+            System.out.println("Korisnik sa id-em:  " + id + " nije pronadjen");
             return new ResponseEntity<Kupac>(HttpStatus.NOT_FOUND);
         }
 
         currentUser.setIme(kupac.getIme());
         currentUser.setPrezime(kupac.getPrezime());
         currentUser.setDatumRodjenja(kupac.getDatumRodjenja());
+        currentUser.setLozinka(kupac.getLozinka());
+        currentUser.setKorisnickoIme(kupac.getKorisnickoIme());
+        currentUser.setPol(kupac.getPol());
 
         kupacService.updateKupac(currentUser);
         return new ResponseEntity<Kupac>(currentUser, HttpStatus.OK);
