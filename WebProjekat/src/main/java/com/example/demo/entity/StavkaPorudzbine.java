@@ -12,8 +12,8 @@ public class StavkaPorudzbine {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
-    private Porudzbina porudzbina;
+//    @ManyToOne
+//    private Porudzbina porudzbina;
 
     @ManyToOne
     private Artikli artikli;
