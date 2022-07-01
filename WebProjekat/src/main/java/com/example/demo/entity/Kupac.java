@@ -20,7 +20,7 @@ public class Kupac extends Korisnik implements Serializable {
     @Column
     private int brojBodova;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private TipKupca tipKupca;
 
     //TODO VEZA

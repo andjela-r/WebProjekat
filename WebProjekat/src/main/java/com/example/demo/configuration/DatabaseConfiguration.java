@@ -45,114 +45,220 @@ public class DatabaseConfiguration {
 
     @Bean
     public boolean instantiate() {
-        TipKupca tipKupca = new TipKupca(
+        TipKupca zlatniTipKupca = new TipKupca(
                 "Zlatni",
                 0.3,
                 200
-
         );
+        tipKupcaRepository.save(zlatniTipKupca);
 
-        tipKupcaRepository.save(tipKupca);
-
-        TipKupca tipKupca1 = new TipKupca(
+        TipKupca srebrniTipKupca = new TipKupca(
                 "Srebrni",
                 0.2,
                 100
-
         );
+        tipKupcaRepository.save(srebrniTipKupca);
 
-        tipKupcaRepository.save(tipKupca1);
-
-        TipKupca tipKupca2 = new TipKupca(
+        TipKupca bronzaniTipKupca = new TipKupca(
                 "Bronzani",
                 0.1,
                 50
-
         );
+        tipKupcaRepository.save(bronzaniTipKupca);
 
-        tipKupcaRepository.save(tipKupca2);
+        //ADMIN
+        Korisnik admin = new Korisnik(
+                "admin", "1234",
+                "Milorad", "Milic",
+                new Date(2000, Calendar.JULY, 4 ),
+                Pol.Muski,
+                Uloga.ADMIN
+        );
+        korisnikRepository.save(admin);
 
-       Korisnik korisnik = new Korisnik(
-               "mile021", "1234",
-               "Milorad", "Milic",
-               new Date(2000, Calendar.JULY, 4 ),
-               Pol.Muski,
-               Uloga.ADMIN
-               );
-       korisnikRepository.save(korisnik);
-
+        //LOKACIJE
         Lokacija lokacija = new Lokacija(
-                11.4, 13.7,
-                "Nikole Pasica 13"
+                45.25131544463255, 19.837983008598467,
+                "Bulevar Oslobođenja 91, Novi Sad"
         );
         lokacijaRepository.save(lokacija);
 
-        Restoran restoran = new Restoran();
-        restoran.setLokacija(lokacija);
-        restoran.setNaziv("Tortilla Casa");
-        restoran.setTip("Meksicka hrana");
-        restoranRepository.save(restoran);
+        Lokacija lokacija1 = new Lokacija(
+                45.249121680493715, 19.84314663497258,
+                "Sremska 9, Novi Sad"
+        );
+        lokacijaRepository.save(lokacija1);
 
-        Menadzer korisnik1 = new Menadzer(
-                "jole", "1a34",
+        Lokacija lokacija2 = new Lokacija(
+                45.24878334532537, 19.841264549073696,
+                "Maksima Gorkog 1a, Novi Sad"
+        );
+        lokacijaRepository.save(lokacija2);
+
+        //RESTORANI
+        Restoran tortillaCasa = new Restoran();
+        tortillaCasa.setLokacija(lokacija);
+        tortillaCasa.setNaziv("Tortilla Casa");
+        tortillaCasa.setTip("Meksička hrana");
+        restoranRepository.save(tortillaCasa);
+
+        Restoran camelot = new Restoran();
+        camelot.setLokacija(lokacija1);
+        camelot.setNaziv("The Camelot Novi Sad");
+        camelot.setTip("Gastro pub");
+        restoranRepository.save(camelot);
+
+        Restoran fresh = new Restoran();
+        fresh.setLokacija(lokacija2);
+        fresh.setNaziv("Sushi Fresh");
+        fresh.setTip("Sushi");
+        restoranRepository.save(fresh);
+
+        Menadzer menadzer = new Menadzer(
+                "menadzer", "1234",
                 "Jovan", "Jovic",
                 new Date(2001, Calendar.MAY, 10 ),
                 Pol.Muski,
                 Uloga.MENADZER
         );
-        korisnik1.setRestoran(restoran);
-        korisnikRepository.save(korisnik1);
+        menadzer.setRestoran(camelot);
+        menadzerRepository.save(menadzer);
 
-        Korisnik korisnik2 = new Korisnik(
-                "maja", "1134",
-                "Maja", "Munjic",
+        //DOSTAVLJAC
+        Dostavljac dostavljac = new Dostavljac(
+                "dostavljac", "1234",
+                "Maja", "Munjić",
                 new Date(2000, Calendar.OCTOBER, 7 ),
                 Pol.Zenski,
                 Uloga.DOSTAVLJAC
         );
-        korisnikRepository.save(korisnik2);
+        dostavljacRepository.save(dostavljac);
 
-        Korisnik korisnik3 = new Korisnik(
-                "lela12", "999",
-                "Leposava", "Lepa",
-                new Date( ),
+        Dostavljac dostavljac1 = new Dostavljac(
+                "dostavljac1", "1234",
+                "Jovan", "Milošević",
+                new Date(1998, Calendar.MARCH, 24 ),
+                Pol.Muski,
+                Uloga.DOSTAVLJAC
+        );
+        dostavljacRepository.save(dostavljac1);
+
+        //KUPCI
+        Kupac kupac = new Kupac(
+                "kupac", "1234",
+                "Leposava", "Milić",
+                new Date(1999, Calendar.MAY, 1),
                 Pol.Zenski,
                 Uloga.KUPAC
         );
-        korisnikRepository.save(korisnik3);
+        kupac.setBrojBodova(150);
+        kupac.setTipKupca(srebrniTipKupca);
+        kupacRepository.save(kupac);
 
-        Kupac kupac = new Kupac(
-                "djolence", "1134",
-                "Djole", "Djokic",
+        Kupac kupac1 = new Kupac(
+                "kupac1", "1234",
+                "Đole", "Đokić",
                 new Date(2000, Calendar.OCTOBER, 7 ),
                 Pol.Muski,
                 Uloga.KUPAC
         );
-        kupacRepository.save(kupac);
+        kupac1.setBrojBodova(98);
+        kupac1.setTipKupca(bronzaniTipKupca);
+        kupacRepository.save(kupac1);
 
+        Kupac kupac2 = new Kupac(
+                "kupac2", "1234",
+                "Milica", "Simonović",
+                new Date(1985, Calendar.JANUARY, 21 ),
+                Pol.Zenski,
+                Uloga.KUPAC
+        );
+        kupac2.setBrojBodova(251);
+        kupac2.setTipKupca(zlatniTipKupca);
+        kupacRepository.save(kupac2);
 
-
-
-        Artikli artikli = new Artikli(
-                "Pileca kobasica",
-                120.99,
+        //ARTIKLI
+        Artikli artikliCamelot = new Artikli(
+                "The Camelot klub sendvič",
+                690.00,
                 TIP.JELO,
-                2000,
-                "Moras probati!!!"
+                600,
+                "Kifla, šampinjoni, slanina, paprika, pavlaka, kečap, sir gauda, paradajz, dimljeni vrat, kulen, pomfrit."
         );
+        artikliRepository.save(artikliCamelot);
 
-        artikliRepository.save(artikli);
+        Artikli artikliCamelot1 = new Artikli(
+                "Pivarska rebarca sa medom",
+                1550.00,
+                TIP.JELO,
+                800,
+                "Rebarca u pivu, tartar sos, podvarak, začinski krompir, lepinja."
+        );
+        artikliRepository.save(artikliCamelot1);
 
-        Artikli artikli1 = new Artikli(
-                "Paradajz sok",
-                399.99,
+        Artikli artikliCamelot2 = new Artikli(
+                "Limunada",
+                230.00,
                 TIP.PICE,
-                1000,
-                "Bogato daj pare"
+                0.3,
+                "Osvežavajuće piće od ceđenog limuna."
         );
+        artikliRepository.save(artikliCamelot2);
 
-        artikliRepository.save(artikli1);
+        Artikli artikliTortilla = new Artikli(
+                "Burrito Acapulco",
+                430.00,
+                TIP.JELO,
+                700,
+                "Piletina, pirinač sa limetom i peršunom, crni pasulj, kukuruz, paradajz, zelena, pavlaka, sir."
+        );
+        artikliRepository.save(artikliTortilla);
 
-       return true;
+        Artikli artikliTortilla1 = new Artikli(
+                "Taquitos pileći",
+                420.00,
+                TIP.JELO,
+                500,
+                "9 kom. + pomfrit + 2 sosa po izboru."
+        );
+        artikliRepository.save(artikliTortilla1);
+
+        Artikli artikliTortilla2 = new Artikli(
+                "Fanta",
+                170.00,
+                TIP.PICE,
+                0.25,
+                "Gazirano piće sa aromom narandže."
+        );
+        artikliRepository.save(artikliTortilla2);
+
+        Artikli artikliFresh = new Artikli(
+                "Philadelfia Maxi Rolls",
+                710.00,
+                TIP.JELO,
+                200,
+                "8 komada. Losos, avokado, krastavac, krem sir, tobiko red."
+        );
+        artikliRepository.save(artikliFresh);
+
+        Artikli artikliFresh1 = new Artikli(
+                "Tempura kraba Premium Rolnice",
+                750.00,
+                TIP.JELO,
+                250,
+                "10 komada. Kraba, avokado, krastavac, wasabi majonez."
+        );
+        artikliRepository.save(artikliFresh1);
+
+        Artikli artikliFresh2 = new Artikli(
+                "Ceđeni Miks",
+                350.00,
+                TIP.PICE,
+                0.3,
+                "limun, narandža, grejpfrut."
+        );
+        artikliRepository.save(artikliFresh2);
+
+        return true;
     }
 }
