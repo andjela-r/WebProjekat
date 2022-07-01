@@ -96,17 +96,18 @@ public class DatabaseConfiguration {
         lokacijaRepository.save(lokacija2);
 
         //RESTORANI
-        Restoran tortillaCasa = new Restoran();
-        tortillaCasa.setLokacija(lokacija);
-        tortillaCasa.setNaziv("Tortilla Casa");
-        tortillaCasa.setTip("Meksička hrana");
-        restoranRepository.save(tortillaCasa);
 
         Restoran camelot = new Restoran();
         camelot.setLokacija(lokacija1);
         camelot.setNaziv("The Camelot Novi Sad");
         camelot.setTip("Gastro pub");
         restoranRepository.save(camelot);
+
+        Restoran tortillaCasa = new Restoran();
+        tortillaCasa.setLokacija(lokacija);
+        tortillaCasa.setNaziv("Tortilla Casa");
+        tortillaCasa.setTip("Meksička hrana");
+        restoranRepository.save(tortillaCasa);
 
         Restoran fresh = new Restoran();
         fresh.setLokacija(lokacija2);
@@ -205,6 +206,11 @@ public class DatabaseConfiguration {
         );
         artikliRepository.save(artikliCamelot2);
 
+        camelot.getArtikliRestoran().add(artikliCamelot);
+        camelot.getArtikliRestoran().add(artikliCamelot1);
+        camelot.getArtikliRestoran().add(artikliCamelot2);
+        restoranRepository.save(camelot);
+
         Artikli artikliTortilla = new Artikli(
                 "Burrito Acapulco",
                 430.00,
@@ -231,6 +237,10 @@ public class DatabaseConfiguration {
                 "Gazirano piće sa aromom narandže."
         );
         artikliRepository.save(artikliTortilla2);
+        tortillaCasa.getArtikliRestoran().add(artikliTortilla);
+        tortillaCasa.getArtikliRestoran().add(artikliTortilla1);
+        tortillaCasa.getArtikliRestoran().add(artikliTortilla2);
+        restoranRepository.save(tortillaCasa);
 
         Artikli artikliFresh = new Artikli(
                 "Philadelfia Maxi Rolls",
@@ -255,9 +265,14 @@ public class DatabaseConfiguration {
                 350.00,
                 TIP.PICE,
                 0.3,
-                "limun, narandža, grejpfrut."
+                "Limun, narandža, grejpfrut."
         );
         artikliRepository.save(artikliFresh2);
+
+        fresh.getArtikliRestoran().add(artikliFresh);
+        fresh.getArtikliRestoran().add(artikliFresh1);
+        fresh.getArtikliRestoran().add(artikliFresh2);
+        restoranRepository.save(fresh);
 
         return true;
     }
