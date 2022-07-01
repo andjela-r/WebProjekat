@@ -11,7 +11,10 @@ public class Menadzer extends Korisnik implements Serializable {
     @OneToOne
     private Restoran restoran;
 
-    public Menadzer() {
+    public Menadzer(){}
+
+    public Menadzer(String jole, String s, String jovan, String jovic, Date date, Pol muski, Uloga menadzer) {
+        super(jole,s,jovan,jovic,date,muski,menadzer);
     }
 
     public Menadzer(String korisnickoIme, String lozinka, String ime, String prezime, Date datumRodjenja, Pol pol, Uloga uloga, Restoran restoran) {

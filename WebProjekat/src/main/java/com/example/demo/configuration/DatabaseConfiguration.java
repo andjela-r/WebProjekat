@@ -81,13 +81,26 @@ public class DatabaseConfiguration {
                );
        korisnikRepository.save(korisnik);
 
-        Korisnik korisnik1 = new Korisnik(
+        Lokacija lokacija = new Lokacija(
+                11.4, 13.7,
+                "Nikole Pasica 13"
+        );
+        lokacijaRepository.save(lokacija);
+
+        Restoran restoran = new Restoran();
+        restoran.setLokacija(lokacija);
+        restoran.setNaziv("Tortilla Casa");
+        restoran.setTip("Meksicka hrana");
+        restoranRepository.save(restoran);
+
+        Menadzer korisnik1 = new Menadzer(
                 "jole", "1a34",
                 "Jovan", "Jovic",
                 new Date(2001, Calendar.MAY, 10 ),
                 Pol.Muski,
                 Uloga.MENADZER
         );
+        korisnik1.setRestoran(restoran);
         korisnikRepository.save(korisnik1);
 
         Korisnik korisnik2 = new Korisnik(
@@ -118,17 +131,7 @@ public class DatabaseConfiguration {
         kupacRepository.save(kupac);
 
 
-        Lokacija lokacija = new Lokacija(
-                11.4, 13.7,
-                "Nikole Pasica 13"
-        );
-        lokacijaRepository.save(lokacija);
 
-        Restoran restoran = new Restoran();
-        restoran.setLokacija(lokacija);
-        restoran.setNaziv("Tortilla Casa");
-        restoran.setTip("Meksicka hrana");
-        restoranRepository.save(restoran);
 
         Artikli artikli = new Artikli(
                 "Pileca kobasica",
