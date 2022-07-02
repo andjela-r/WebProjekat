@@ -2,9 +2,11 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.DostavljacDto;
 import com.example.demo.dto.MenadzerDto;
+import com.example.demo.dto.RestoranDto;
 import com.example.demo.entity.Dostavljac;
 import com.example.demo.entity.Korisnik;
 import com.example.demo.entity.Menadzer;
+import com.example.demo.entity.Restoran;
 import com.example.demo.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -79,6 +81,23 @@ public class AdminController {
         return ResponseEntity.ok("Uspesno kreiran nalog za dostavljaca!");
     }
 
+    @PostMapping("api/admin/add-restoran")
+    public ResponseEntity<String> addRestoran (@RequestBody RestoranDto restoranDto, HttpSession session){
+        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
+        if (loggedKorisnik == null) {
+            return new ResponseEntity("Niste ulogovani.", HttpStatus.UNAUTHORIZED);
+        }
+        if(restoranDto.getNaziv().isEmpty() || restoranDto.getTip().isEmpty())
+            return new ResponseEntity("Nisu uneti neophodni podaci.", HttpStatus.BAD_REQUEST);
+
+        Restoran newRestoran = adminService.createRestoran(restoranDto, loggedKorisnik);
+
+        if(newRestoran == null)
+            return new ResponseEntity("Nemate dozvolu da ovo uradite!", HttpStatus.FORBIDDEN);
+
+        session.setAttribute("created", newRestoran);
+        return ResponseEntity.ok("Uspesno kreiran restoran!");
+    }
 
 
 

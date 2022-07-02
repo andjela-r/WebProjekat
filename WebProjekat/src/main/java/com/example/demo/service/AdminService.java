@@ -2,15 +2,14 @@ package com.example.demo.service;
 
 import com.example.demo.dto.DostavljacDto;
 import com.example.demo.dto.MenadzerDto;
+import com.example.demo.dto.RestoranDto;
 import com.example.demo.entity.*;
-import com.example.demo.repository.DostavljacRepository;
-import com.example.demo.repository.KorisnikRepository;
-import com.example.demo.repository.MenadzerRepository;
-import com.example.demo.repository.RestoranRepository;
+import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdminService {
@@ -26,6 +25,9 @@ public class AdminService {
 
     @Autowired
     private RestoranRepository restoranRepository;
+
+    @Autowired
+    private LokacijaRepository lokacijaRepository;
 
     /*Prikazi sve korisnike*/
     public List<Korisnik> findAll(Korisnik loggedKorisnik){
@@ -77,5 +79,25 @@ public class AdminService {
         }
         return null; //nije admin
     }
+    /*Kreiraj novi restoran*/
+    public Restoran createRestoran(RestoranDto restoranDto, Korisnik loggedKorisnik){
+        if(loggedKorisnik.getUloga() == Uloga.ADMIN) {
+            Long id_menadzera = restoranDto.getId_menadzera();
+            Optional<Menadzer> noviMenadzer = menadzerRepository.findById(id_menadzera);
 
+            Long id_lokacija = restoranDto.getId_lokacija();
+            Optional<Lokacija> novaLokacija = lokacijaRepository.findById(id_lokacija);
+
+
+            Restoran restoran = new Restoran(restoranDto.getNaziv(),
+                    restoranDto.getTip(),
+                    novaLokacija.get());
+
+            noviMenadzer.get().setRestoran(restoran);
+            menadzerRepository.save(noviMenadzer.get());
+            //restoranRepository.save(restoran);
+            return restoran;
+        }
+        return null; //nije admin
+    }
 }

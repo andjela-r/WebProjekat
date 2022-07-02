@@ -8,7 +8,7 @@ import java.util.Date;
 public class Menadzer extends Korisnik implements Serializable {
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     private Restoran restoran;
 
     public Menadzer(){}

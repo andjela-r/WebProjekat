@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class RestoranService {
@@ -18,6 +19,7 @@ public class RestoranService {
         return restoranRepository.getOne(id);
     }
 
+    public List<Restoran> getAllRestoran(){ return restoranRepository.findAll(); }
     /*public String findByIme(String restoran){
         restoran;
     }*/
