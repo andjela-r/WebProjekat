@@ -13,6 +13,10 @@ public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
     Korisnik getByKorisnickoIme(String username);
     boolean existsByKorisnickoIme(String username);
 
+    List<Korisnik> findByIme(String ime);
+    List<Korisnik> findByPrezime(String prezime);
+    List<Korisnik> findByKorisnickoIme(String korisnickoIme);
+
 
     //    boolean updateKorisnik(
 //            Long id,
