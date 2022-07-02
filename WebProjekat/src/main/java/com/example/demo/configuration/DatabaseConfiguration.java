@@ -95,6 +95,12 @@ public class DatabaseConfiguration {
         );
         lokacijaRepository.save(lokacija2);
 
+        Lokacija lokacija3 = new Lokacija(
+                56.24878334532537, 23.841264549073696,
+                "Nikole Pašića 39, Kragujevac"
+        );
+        lokacijaRepository.save(lokacija3);
+
         //RESTORANI
 
         Restoran camelot = new Restoran();
@@ -124,6 +130,15 @@ public class DatabaseConfiguration {
         );
         menadzer.setRestoran(camelot);
         menadzerRepository.save(menadzer);
+
+        Menadzer menadzer1 = new Menadzer(
+                "menadzer1", "1234",
+                "Jovana", "Jovanović",
+                new Date(1996, Calendar.SEPTEMBER, 13 ),
+                Pol.Zenski,
+                Uloga.MENADZER
+        );
+        menadzerRepository.save(menadzer1);
 
         //DOSTAVLJAC
         Dostavljac dostavljac = new Dostavljac(

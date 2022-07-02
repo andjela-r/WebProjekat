@@ -15,7 +15,10 @@ public class RestoranController {
     private RestoranService restoranService;
 
     @RequestMapping(value = "/api/restorani", method = RequestMethod.GET)
-    public List<Restoran> getAllRestoran(){ return restoranService.getAllRestoran();}
+    public List<Restoran> getAllRestoran(){
+        return restoranService.getAllRestoran();
+    }
+
   /*  @RequestMapping(value = "/api/restoran/{restoran}" , method = RequestMethod.GET)
     public @ResponseBody
     List<Restoran> getUser(@PathVariable("restoran") String restoran) {
