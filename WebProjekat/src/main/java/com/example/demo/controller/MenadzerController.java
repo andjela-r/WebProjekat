@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.MenadzerDto;
+import com.example.demo.dto.ArtikalDto;
 import com.example.demo.entity.Artikli;
 import com.example.demo.entity.Korisnik;
 import com.example.demo.entity.Menadzer;
@@ -27,6 +28,9 @@ import java.util.Set;
 public class MenadzerController {
     @Autowired
     private KorisnikService korisnikService;
+
+    @Autowired
+    private MenadzerService menadzerService;
 
     @Autowired
     private RestoranRepository restoranRepository;
@@ -59,5 +63,26 @@ public class MenadzerController {
         }
 
         return new ResponseEntity("Nije funkcionalno.", HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/api/menadzer/add-artikal")
+    public ResponseEntity<String> addArtikal (@RequestBody ArtikalDto artikalDto, HttpSession session){
+        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
+        if (loggedKorisnik == null) {
+            return new ResponseEntity("Niste ulogovani.", HttpStatus.UNAUTHORIZED);
+        }
+        if(artikalDto.getNaziv().isEmpty()
+                || artikalDto.getTip().toString().isEmpty()
+                || artikalDto.getOpis().isEmpty())
+            return new ResponseEntity("Nisu uneti neophodni podaci.", HttpStatus.BAD_REQUEST);
+
+        Artikli newArtikli = menadzerService.createArtikal(artikalDto, loggedKorisnik);
+        if(newArtikli == null){
+            return new ResponseEntity("Proverite korisnicko ime i restoran, nesto nije bas dobro :'(", HttpStatus.I_AM_A_TEAPOT);
+            //kako resiti?
+        }
+
+        session.setAttribute("created", newArtikli);
+        return ResponseEntity.ok("Uspesno kreiran artikal!");
     }
 }
