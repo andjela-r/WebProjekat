@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Artikli;
-import com.example.demo.entity.Kupac;
 import com.example.demo.repository.ArtikliRepository;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +8,10 @@ import org.springframework.stereotype.Service;
 public class ArtikliService {
 
     private ArtikliRepository artikliRepository;
+
+    public ArtikliService(ArtikliRepository artikliRepository) {
+        this.artikliRepository = artikliRepository;
+    }
 
     public Artikli getById(Long id) {
 

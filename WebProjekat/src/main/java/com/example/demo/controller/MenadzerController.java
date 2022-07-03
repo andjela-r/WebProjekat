@@ -93,7 +93,6 @@ public class MenadzerController {
             System.out.println("Artikal sa id-em:  " + id + " nije pronadjen");
             return new ResponseEntity<Artikli>(HttpStatus.NOT_FOUND);
         }
-
         currentArt.setNaziv(artikli.getNaziv());
         currentArt.setCena(artikli.getCena());
         currentArt.setKolicina(artikli.getKolicina());
