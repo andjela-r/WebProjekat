@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -35,22 +36,20 @@ public class MenadzerController {
 
     @GetMapping("/api/menadzer/moj-restoran")
     public ResponseEntity<Restoran> getMyRestoran(HttpSession session){
-        Korisnik loggedMenadzer = (Korisnik) session.getAttribute("korisnik");
+        Menadzer loggedMenadzer = (Menadzer) session.getAttribute("korisnik");
         if (loggedMenadzer == null) {
             return new ResponseEntity("Niste ulogovani.", HttpStatus.UNAUTHORIZED);
         }
-        Optional<Korisnik> realMenadzer = korisnikService.findById(loggedMenadzer.getId());
-        if(!realMenadzer.isPresent()){
+        Menadzer realMenadzer = menadzerService.findById(loggedMenadzer.getId());
+        if(realMenadzer == null){
             return new ResponseEntity("Niste menadzer.", HttpStatus.UNAUTHORIZED);
         }
-        //Restoran restoran = realMenadzer.get().getRestoran();
-        //Restoran restoran = restoranRepository.getById(loggedMenadzer.getRestoran().getId());
+        Restoran restoran = realMenadzer.getRestoran();
+        if (restoran == null) {
+            return new ResponseEntity("Nemate dodeljeni restoran!", HttpStatus.FORBIDDEN);
+        }
 
-//        if (restoran == null) {
-//            return new ResponseEntity("Nemate dodeljeni restoran!", HttpStatus.FORBIDDEN);
-//        }
-
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(restoran);
     }
 
     @GetMapping("/api/menadzer/porudzbine")
@@ -59,8 +58,8 @@ public class MenadzerController {
         if (loggedMenadzer == null) {
             return new ResponseEntity("Niste ulogovani.", HttpStatus.UNAUTHORIZED);
         }
-
-        return new ResponseEntity("Nije funkcionalno.", HttpStatus.BAD_REQUEST);
+        Set<Artikli> restoranArtikli = loggedMenadzer.getRestoran().getArtikliRestoran();
+        return ResponseEntity.ok(restoranArtikli);
     }
 
     @PostMapping("/api/menadzer/add-artikal")
@@ -69,9 +68,12 @@ public class MenadzerController {
         if (loggedKorisnik == null) {
             return new ResponseEntity("Niste ulogovani.", HttpStatus.UNAUTHORIZED);
         }
-        if(artikalDto.getNaziv().isEmpty()
-                || artikalDto.getTip().toString().isEmpty())
-            return new ResponseEntity("Nisu uneti neophodni podaci.", HttpStatus.I_AM_A_TEAPOT);
+        if(artikalDto.getNaziv().isEmpty() ||
+                artikalDto.getTip().toString().isEmpty() ||
+                artikalDto.getCena()== 0.0)
+
+                //String.valueOf(artikalDto.getCena().isEmpty())
+            return new ResponseEntity("Nisu uneti neophodni podaci.", HttpStatus.BAD_REQUEST);
 
         Artikli newArtikli = menadzerService.createArtikal(artikalDto, loggedKorisnik);
         if(newArtikli == null){
@@ -83,15 +85,13 @@ public class MenadzerController {
         return ResponseEntity.ok("Uspesno kreiran artikal!");
     }
 
-    @RequestMapping(value = "/api/updatea/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/api/menadzer/izmeni-artikal/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Artikli> updateArtikal(@PathVariable("id") long id, @RequestBody Artikli artikli) {
-        System.out.println("Azuriras artikal sa id:  " + id);
 
        Artikli currentArt = artikliService.getById(id);
 
         if (currentArt==null) {
-            System.out.println("Artikal sa id-em:  " + id + " nije pronadjen");
-            return new ResponseEntity<Artikli>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         currentArt.setNaziv(artikli.getNaziv());
         currentArt.setCena(artikli.getCena());
@@ -100,6 +100,13 @@ public class MenadzerController {
         currentArt.setTip(artikli.getTip());
 
         artikliService.updateArtikli(currentArt);
-        return new ResponseEntity<Artikli>(currentArt, HttpStatus.OK);
+        return new ResponseEntity(currentArt, HttpStatus.OK);
+    }
+
+    //@Transactional
+    @PutMapping("/api/restorani/delete-artikal/{id}")
+    public void deleteArtikal(@PathVariable Long id, HttpSession session) {
+        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
+        menadzerService.deleteArtikal(id, loggedKorisnik);
     }
 }

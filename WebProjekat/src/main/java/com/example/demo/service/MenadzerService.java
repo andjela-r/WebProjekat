@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class MenadzerService {
@@ -21,10 +22,13 @@ public class MenadzerService {
     @Autowired
     private RestoranRepository restoranRepository;
 
+    public Menadzer findById(Long id){
+        return menadzerRepository.getById(id);
+    }
+
     public Artikli createArtikal(ArtikalDto artikliDto, Korisnik loggedKorisnik){
         if(loggedKorisnik.getUloga() == Uloga.MENADZER) {
             Menadzer menadzer = (Menadzer) loggedKorisnik;
-        //    Artikli artikal = artikliRepository.getById(artikliDto.getId());
 
             Artikli artikli = new Artikli(
                     artikliDto.getNaziv(),
@@ -34,7 +38,7 @@ public class MenadzerService {
                     artikliDto.getOpis()
                     );
             if (artikliRepository.existsByNaziv(artikli.getNaziv())) {
-                return null; //menadzer postoji
+                return null;
             }
             artikliRepository.save(artikli);
 
@@ -45,10 +49,17 @@ public class MenadzerService {
 
             return artikli;
         }
-        return null; //nije admin
+        return null;
+    }
+    //NE RADI
+    public void deleteArtikal(Long id_artikla, Korisnik korisnik) {
+        Menadzer menadzer = (Menadzer) korisnik;
+        Set<Artikli> artikli =  menadzer.getRestoran().getArtikliRestoran();
+        for(Artikli artikal : artikli){
+            if(artikal.getId().equals(id_artikla)){
+                menadzer.getRestoran().getArtikliRestoran().remove(artikal);
 
-
-       // public Optional<Menadzer> findById(Long id) {
-       // return menadzerRepository.findById(id);
+            }
+        }
     }
 }

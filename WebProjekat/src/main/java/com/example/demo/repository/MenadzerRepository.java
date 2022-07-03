@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface MenadzerRepository extends JpaRepository<Menadzer, Long>{
     boolean existsByKorisnickoIme(String username);
 
+    Menadzer getById(Long id);
 }

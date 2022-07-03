@@ -19,6 +19,11 @@ public class RestoranController {
         return restoranService.getAllRestoran();
     }
 
+    @GetMapping("/api/restorani/{id}")
+    public Restoran pretragaPoId(@PathVariable Long id){
+        return restoranService.getById(id);
+    }
+
     @GetMapping("/api/restorani/pretraga-naziv/{naziv}")
     public List<Restoran> pretragaPoNazivu(@PathVariable String naziv){
         return restoranService.findByNaziv(naziv);
