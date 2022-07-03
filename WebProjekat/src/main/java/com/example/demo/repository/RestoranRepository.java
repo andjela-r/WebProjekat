@@ -10,6 +10,7 @@ import java.util.List;
 public interface RestoranRepository extends JpaRepository<Restoran, Long>{
     Restoran getById(Long id);
     List<Restoran> findAll();
+    void deleteById(Long id);
 
 
   /*  Restoran findByIme(String ime);

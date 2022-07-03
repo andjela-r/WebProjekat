@@ -11,12 +11,10 @@ import com.example.demo.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.*;
 import java.util.List;
 
 @RestController
@@ -99,7 +97,22 @@ public class AdminController {
         return ResponseEntity.ok("Uspesno kreiran restoran!");
     }
 
+    @DeleteMapping("/api/restorani/delete-restoran/{id}")
+    public void deleteRestoran(@PathVariable Long id) {
+        adminService.deleteRestoran(id);
+    }
 
-
+    @GetMapping("/api/admin/korisnici/pretraga-ime/{ime}")
+    public List<Korisnik> pretragaPoImenu(@PathVariable String ime){
+        return adminService.findByIme(ime);
+    }
+    @GetMapping("api/admin/korisnici/pretraga-prezime/{prezime}")
+    public List<Korisnik> pretragaPoPrezimenu(@PathVariable String prezime){
+        return adminService.findByPrezime(prezime);
+    }
+    @GetMapping("api/admin/korisnici/pretraga-korisnicko-ime/{korisnickoIme}")
+    public List<Korisnik> pretragaPoKorisnickomImenu(@PathVariable String korisnickoIme){
+        return adminService.findByKorisnickoIme(korisnickoIme);
+    }
 
 }

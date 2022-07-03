@@ -100,4 +100,18 @@ public class AdminService {
         }
         return null; //nije admin
     }
+
+    public void deleteRestoran(Long id_restorana){
+        restoranRepository.deleteById(id_restorana);
+    }
+
+    public List<Korisnik> findByIme(String ime){
+        return korisnikRepository.findByIme(ime);
+    }
+    public List<Korisnik> findByPrezime(String prezime){
+        return korisnikRepository.findByPrezime(prezime);
+    }
+    public List<Korisnik> findByKorisnickoIme(String korisnickoIme){
+        return korisnikRepository.findByKorisnickoIme(korisnickoIme);
+    }
 }
