@@ -1,11 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.LoginDto;
-import com.example.demo.dto.MenadzerDto;
-import com.example.demo.dto.RegisterDto;
-import com.example.demo.entity.Dostavljac;
-import com.example.demo.entity.Korisnik;
-import com.example.demo.entity.Menadzer;
+import com.example.demo.dto.*;
+import com.example.demo.entity.*;
 import com.example.demo.service.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,6 +38,26 @@ public class KorisnikController {
 
         session.setAttribute("korisnik", loggedKorisnik);
         return ResponseEntity.ok("Uspesno logovanje!");
+    }
+
+    @PostMapping("/api/menadzer/add-kom")
+    public ResponseEntity<String> addKomentar (@RequestBody KomentarDto komentarDto, HttpSession session){
+        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
+        if (loggedKorisnik == null) {
+            return new ResponseEntity("Niste ulogovani.", HttpStatus.UNAUTHORIZED);
+        }
+        if(komentarDto.getTekst().isEmpty()
+                || komentarDto.getOcena()==0)
+            return new ResponseEntity("Nisu uneti neophodni podaci.", HttpStatus.I_AM_A_TEAPOT);
+
+        Komentar newKom = korisnikService.createKomentar(komentarDto, loggedKorisnik);
+        if(newKom == null){
+            return new ResponseEntity("Proverite ...nesto nije bas dobro :'(", HttpStatus.I_AM_A_TEAPOT);
+            //kako resiti?
+        }
+
+        session.setAttribute("created", newKom);
+        return ResponseEntity.ok("Uspesno kreiran komentar!");
     }
 //
 //    @PostMapping("/api/register")

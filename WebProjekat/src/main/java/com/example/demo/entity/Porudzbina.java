@@ -8,15 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-enum STATUS{
-    OBRADA,
-    PRIPREMA,
-    CEKA_DOSTAVLJACA,
-    TRANSPORT,
-    DOSTAVLJENO,
-    OTKAZANO
-}
-
 @Entity
 public class Porudzbina implements Serializable {
 

@@ -22,6 +22,9 @@ public class Komentar implements Serializable {
     @Column
     private int ocena;
 
+    public Komentar(String tekst, int ocena) {
+    }
+
     public com.example.demo.entity.Kupac getK() {
         return k;
     }
