@@ -2,22 +2,17 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.MenadzerDto;
 import com.example.demo.dto.ArtikalDto;
-import com.example.demo.entity.Artikli;
-import com.example.demo.entity.Korisnik;
-import com.example.demo.entity.Menadzer;
-import com.example.demo.entity.Restoran;
+import com.example.demo.entity.*;
 import com.example.demo.repository.KorisnikRepository;
 import com.example.demo.repository.RestoranRepository;
+import com.example.demo.service.ArtikliService;
 import com.example.demo.service.KorisnikService;
 import com.example.demo.service.MenadzerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.reactive.ReactiveSortingRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -31,6 +26,9 @@ public class MenadzerController {
 
     @Autowired
     private MenadzerService menadzerService;
+
+    @Autowired
+    private ArtikliService artikliService;
 
     @Autowired
     private RestoranRepository restoranRepository;
@@ -72,9 +70,8 @@ public class MenadzerController {
             return new ResponseEntity("Niste ulogovani.", HttpStatus.UNAUTHORIZED);
         }
         if(artikalDto.getNaziv().isEmpty()
-                || artikalDto.getTip().toString().isEmpty()
-                || artikalDto.getOpis().isEmpty())
-            return new ResponseEntity("Nisu uneti neophodni podaci.", HttpStatus.BAD_REQUEST);
+                || artikalDto.getTip().toString().isEmpty())
+            return new ResponseEntity("Nisu uneti neophodni podaci.", HttpStatus.I_AM_A_TEAPOT);
 
         Artikli newArtikli = menadzerService.createArtikal(artikalDto, loggedKorisnik);
         if(newArtikli == null){
@@ -84,5 +81,25 @@ public class MenadzerController {
 
         session.setAttribute("created", newArtikli);
         return ResponseEntity.ok("Uspesno kreiran artikal!");
+    }
+
+    @RequestMapping(value = "/api/updatea/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Artikli> updateArtikal(@PathVariable("id") long id, @RequestBody Artikli artikli) {
+        System.out.println("Azuriras artikal sa id:  " + id);
+
+       Artikli currentArt = artikliService.getById(id);
+
+        if (currentArt==null) {
+            System.out.println("Artikal sa id-em:  " + id + " nije pronadjen");
+            return new ResponseEntity<Artikli>(HttpStatus.NOT_FOUND);
+        }
+        currentArt.setNaziv(artikli.getNaziv());
+        currentArt.setCena(artikli.getCena());
+        currentArt.setKolicina(artikli.getKolicina());
+        currentArt.setOpis(artikli.getOpis());
+        currentArt.setTip(artikli.getTip());
+
+        artikliService.updateArtikli(currentArt);
+        return new ResponseEntity<Artikli>(currentArt, HttpStatus.OK);
     }
 }
