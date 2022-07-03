@@ -36,22 +36,20 @@ public class MenadzerController {
 
     @GetMapping("/api/menadzer/moj-restoran")
     public ResponseEntity<Restoran> getMyRestoran(HttpSession session){
-        Korisnik loggedMenadzer = (Korisnik) session.getAttribute("korisnik");
+        Menadzer loggedMenadzer = (Menadzer) session.getAttribute("korisnik");
         if (loggedMenadzer == null) {
             return new ResponseEntity("Niste ulogovani.", HttpStatus.UNAUTHORIZED);
         }
-        Optional<Korisnik> realMenadzer = korisnikService.findById(loggedMenadzer.getId());
-        if(!realMenadzer.isPresent()){
+        Menadzer realMenadzer = menadzerService.findById(loggedMenadzer.getId());
+        if(realMenadzer == null){
             return new ResponseEntity("Niste menadzer.", HttpStatus.UNAUTHORIZED);
         }
-        //Restoran restoran = realMenadzer.get().getRestoran();
-        //Restoran restoran = restoranRepository.getById(loggedMenadzer.getRestoran().getId());
+        Restoran restoran = realMenadzer.getRestoran();
+        if (restoran == null) {
+            return new ResponseEntity("Nemate dodeljeni restoran!", HttpStatus.FORBIDDEN);
+        }
 
-//        if (restoran == null) {
-//            return new ResponseEntity("Nemate dodeljeni restoran!", HttpStatus.FORBIDDEN);
-//        }
-
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(restoran);
     }
 
     @GetMapping("/api/menadzer/porudzbine")
@@ -60,8 +58,8 @@ public class MenadzerController {
         if (loggedMenadzer == null) {
             return new ResponseEntity("Niste ulogovani.", HttpStatus.UNAUTHORIZED);
         }
-
-        return new ResponseEntity("Nije funkcionalno.", HttpStatus.BAD_REQUEST);
+        Set<Artikli> restoranArtikli = loggedMenadzer.getRestoran().getArtikliRestoran();
+        return ResponseEntity.ok(restoranArtikli);
     }
 
     @PostMapping("/api/menadzer/add-artikal")
