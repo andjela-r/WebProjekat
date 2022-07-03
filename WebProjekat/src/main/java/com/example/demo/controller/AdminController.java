@@ -103,16 +103,17 @@ public class AdminController {
     }
 
     @GetMapping("/api/admin/korisnici/pretraga-ime/{ime}")
-    public List<Korisnik> pretragaPoImenu(@PathVariable String ime){
-        return adminService.findByIme(ime);
+    public ResponseEntity<List<Korisnik>> pretragaPoImenu(@PathVariable String ime){
+        return ResponseEntity.ok(adminService.findByIme(ime));
     }
+
     @GetMapping("api/admin/korisnici/pretraga-prezime/{prezime}")
-    public List<Korisnik> pretragaPoPrezimenu(@PathVariable String prezime){
-        return adminService.findByPrezime(prezime);
+    public ResponseEntity<List<Korisnik>> pretragaPoPrezimenu(@PathVariable String prezime){
+        return ResponseEntity.ok(adminService.findByPrezime(prezime));
     }
     @GetMapping("api/admin/korisnici/pretraga-korisnicko-ime/{korisnickoIme}")
-    public List<Korisnik> pretragaPoKorisnickomImenu(@PathVariable String korisnickoIme){
-        return adminService.findByKorisnickoIme(korisnickoIme);
+    public ResponseEntity<List<Korisnik>> pretragaPoKorisnickomImenu(@PathVariable String korisnickoIme){
+        return ResponseEntity.ok(adminService.findByKorisnickoIme(korisnickoIme));
     }
 
 }

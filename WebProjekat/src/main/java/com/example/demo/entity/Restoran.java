@@ -23,7 +23,7 @@ public class Restoran implements Serializable {
     private Lokacija lokacija;
 
 
-    @OneToMany (fetch = FetchType.EAGER)// DONE one to many
+    @OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)// DONE one to many
     private Set<Artikli> artikliRestoran = new HashSet<>(); //artikli treba da budu
 
 //    @OneToMany //DONE one to many

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class MenadzerService {
@@ -46,9 +47,15 @@ public class MenadzerService {
             return artikli;
         }
         return null; //nije admin
-
-
-       // public Optional<Menadzer> findById(Long id) {
-       // return menadzerRepository.findById(id);
+    }
+    public void deleteArtikal(Long id_artikla, Korisnik korisnik) {
+        Menadzer menadzer = (Menadzer) korisnik;
+        Set<Artikli> artikli =  menadzer.getRestoran().getArtikliRestoran();
+        for(Artikli artikal : artikli){
+            if(artikal.getId().equals(id_artikla)){
+                menadzer.getRestoran().getArtikliRestoran().remove(artikal);
+                //artikliRepository.deleteById(id_artikla);
+            }
+        }
     }
 }
