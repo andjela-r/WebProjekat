@@ -19,6 +19,21 @@ public class RestoranController {
         return restoranService.getAllRestoran();
     }
 
+    @GetMapping("/api/restorani/pretraga-naziv/{naziv}")
+    public List<Restoran> pretragaPoNazivu(@PathVariable String naziv){
+        return restoranService.findByNaziv(naziv);
+    }
+
+    @GetMapping("/api/restorani/pretraga-tip/{tip}")
+    public List<Restoran> pretragaPoTipu(@PathVariable String tip){
+        return restoranService.findByTip(tip);
+    }
+
+    @GetMapping("/api/restorani/pretraga-lokacija/{lokacija}")
+    public List<Restoran> pretragaPoLokaciji(@PathVariable Long id){
+        return restoranService.getByLokacija(id);
+    }
+
   /*  @RequestMapping(value = "/api/restoran/{restoran}" , method = RequestMethod.GET)
     public @ResponseBody
     List<Restoran> getUser(@PathVariable("restoran") String restoran) {
