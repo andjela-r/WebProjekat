@@ -22,12 +22,12 @@ public class MenadzerService {
     @Autowired
     private RestoranRepository restoranRepository;
 
-    public Menadzer findById(Long id){
+    public Menadzer findById(Long id) {
         return menadzerRepository.getById(id);
     }
 
-    public Artikli createArtikal(ArtikalDto artikliDto, Korisnik loggedKorisnik){
-        if(loggedKorisnik.getUloga() == Uloga.MENADZER) {
+    public Artikli createArtikal(ArtikalDto artikliDto, Korisnik loggedKorisnik) {
+        if (loggedKorisnik.getUloga() == Uloga.MENADZER) {
             Menadzer menadzer = (Menadzer) loggedKorisnik;
 
             Artikli artikli = new Artikli(
@@ -36,7 +36,7 @@ public class MenadzerService {
                     artikliDto.getTip(),
                     artikliDto.getKolicina(),
                     artikliDto.getOpis()
-                    );
+            );
             if (artikliRepository.existsByNaziv(artikli.getNaziv())) {
                 return null;
             }
@@ -52,23 +52,25 @@ public class MenadzerService {
         return null;
     }
 
-    public void radiRestoran(Korisnik loggedKorisnik){
+    public void radiRestoran(Korisnik loggedKorisnik) {
         Menadzer menadzer = (Menadzer) loggedKorisnik;
         Restoran restoran = menadzer.getRestoran();
         restoran.setRadi(true);
         restoranRepository.save(menadzer.getRestoran());
     }
 
-
     //NE RADI
-    public void deleteArtikal(Long id_artikla, Korisnik korisnik) {
+    /*public void deleteArtikal(Long id_artikla, Korisnik korisnik) {
         Menadzer menadzer = (Menadzer) korisnik;
         Set<Artikli> artikli =  menadzer.getRestoran().getArtikliRestoran();
         for(Artikli artikal : artikli){
             if(artikal.getId().equals(id_artikla)){
                 menadzer.getRestoran().getArtikliRestoran().remove(artikal);
-
             }
         }
+    }*/
+    public void brisanjeArtikla(Long a) {
+        artikliRepository.deleteById(a);
     }
+
 }

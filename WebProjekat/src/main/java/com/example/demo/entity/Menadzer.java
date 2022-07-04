@@ -11,6 +11,9 @@ public class Menadzer extends Korisnik implements Serializable {
     @OneToOne(cascade = CascadeType.MERGE)
     private Restoran restoran;
 
+    @Lob
+    private byte[] pic;
+
     public Menadzer(){}
 
     public Menadzer(String jole, String s, String jovan, String jovic, Date date, Pol muski, Uloga menadzer) {

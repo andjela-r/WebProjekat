@@ -38,10 +38,11 @@ public class RestoranController {
     public List<Restoran> pretragaPoLokaciji(@PathVariable Long id){
         return restoranService.getByLokacija(id);
     }
+    }
 
   /*  @RequestMapping(value = "/api/restoran/{restoran}" , method = RequestMethod.GET)
     public @ResponseBody
     List<Restoran> getUser(@PathVariable("restoran") String restoran) {
         return RestoranService.findByIme(restoran);
     }*/
-}
+

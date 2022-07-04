@@ -110,6 +110,7 @@ public class DatabaseConfiguration {
         camelot.setLokacija(lokacija1);
         camelot.setNaziv("The Camelot Novi Sad");
         camelot.setTip("Gastro pub");
+        camelot.setOcena(3.5);
         camelot.setRadi(true);
         restoranRepository.save(camelot);
 
@@ -117,6 +118,7 @@ public class DatabaseConfiguration {
         tortillaCasa.setLokacija(lokacija);
         tortillaCasa.setNaziv("Tortilla Casa");
         tortillaCasa.setTip("Meksička hrana");
+        camelot.setOcena(4.0);
         tortillaCasa.setRadi(true);
         restoranRepository.save(tortillaCasa);
 
@@ -124,6 +126,7 @@ public class DatabaseConfiguration {
         fresh.setLokacija(lokacija2);
         fresh.setNaziv("Sushi Fresh");
         fresh.setTip("Sushi");
+        fresh.setOcena(2.6);
         fresh.setRadi(false);
         restoranRepository.save(fresh);
 

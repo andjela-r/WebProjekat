@@ -88,6 +88,14 @@ public class Restoran implements Serializable {
         this.tip = tip;
     }
 
+    public double getOcena() {
+        return ocena;
+    }
+
+    public void setOcena(double ocena) {
+        this.ocena = ocena;
+    }
+
     public void setLokacija(com.example.demo.entity.Lokacija lokacija) {
         this.lokacija = lokacija;
     }

@@ -114,7 +114,7 @@ public class MenadzerController {
     @PutMapping("/api/restorani/delete-artikal/{id}")
     public ResponseEntity<String> deleteArtikal(@PathVariable Long id, HttpSession session) {
         Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
-        menadzerService.deleteArtikal(id, loggedKorisnik);
+        menadzerService.brisanjeArtikla(id);
         return ResponseEntity.ok("Uspesno obrisan atrikal.");
     }
 }
