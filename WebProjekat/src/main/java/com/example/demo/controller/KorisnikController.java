@@ -40,8 +40,8 @@ public class KorisnikController {
         return ResponseEntity.ok("Uspesno logovanje!");
     }
 
-    @PostMapping("/api/menadzer/add-kom")
-    public ResponseEntity<String> addKomentar (@RequestBody KomentarDto komentarDto, HttpSession session){
+   /* @PostMapping("/api/menadzer/add-kom")
+   public ResponseEntity<String> addKomentar (@RequestBody KomentarDto komentarDto, HttpSession session){
         Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
         if (loggedKorisnik == null) {
             return new ResponseEntity("Niste ulogovani.", HttpStatus.UNAUTHORIZED);
@@ -145,5 +145,5 @@ public class KorisnikController {
 
         session.invalidate();
         return new ResponseEntity("Uspesno ste izlogovani!", HttpStatus.OK);
-    }
+    }*/
 }
