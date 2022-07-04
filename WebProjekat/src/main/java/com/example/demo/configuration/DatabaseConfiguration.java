@@ -41,6 +41,9 @@ public class DatabaseConfiguration {
     @Autowired
     private TipKupcaRepository tipKupcaRepository;
 
+    @Autowired
+    private StavkaPorudzbineRepository stavkaPorudzbineRepository;
+
 
 
     @Bean
@@ -291,6 +294,30 @@ public class DatabaseConfiguration {
         fresh.getArtikliRestoran().add(artikliFresh1);
         fresh.getArtikliRestoran().add(artikliFresh2);
         restoranRepository.save(fresh);
+
+        StavkaPorudzbine stavka = new StavkaPorudzbine(
+                artikliCamelot,
+                150
+        );
+        stavkaPorudzbineRepository.save(stavka);
+
+        Porudzbina gotovaPorudzbina = new Porudzbina(
+                camelot,
+                dostavljac,
+                new Date(2022, Calendar.JUNE, 4),
+                500.0,
+                STATUS.DOSTAVLJENO,
+                kupac
+        );
+        gotovaPorudzbina.getStavka().add(stavka);
+        kupac.getPorudzbina().add(gotovaPorudzbina);
+        //kupacRepository.save(kupac);
+        dostavljac.getPorudzbinaDostavljac().add(gotovaPorudzbina);
+
+        porudzbinaRepository.save(gotovaPorudzbina);
+        dostavljacRepository.save(dostavljac);
+
+
 
         return true;
     }

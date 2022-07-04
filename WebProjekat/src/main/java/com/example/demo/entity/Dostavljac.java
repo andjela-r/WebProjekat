@@ -1,15 +1,18 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class Dostavljac extends Korisnik implements Serializable {
 
-    @OneToMany(fetch = FetchType.LAZY) //Unidirekciona veza, Dostavljac "vidi" Porudzbina, Porudzbina "ne vidi" Dostavljac
-    private Set<Porudzbina> porudzbinaDostavljac;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE) //Unidirekciona veza, Dostavljac "vidi" Porudzbina, Porudzbina "ne vidi" Dostavljac
+    private Set<Porudzbina> porudzbinaDostavljac = new HashSet<>();
 
 
     public Dostavljac() {

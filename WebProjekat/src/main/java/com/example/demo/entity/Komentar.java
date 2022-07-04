@@ -11,7 +11,7 @@ public class Komentar implements Serializable {
     private Long id;
 
     @ManyToOne //DONE many to one
-    private Kupac k;
+    private Kupac kupac;
 
     @ManyToOne //DONE many to one
     private Restoran restoran;
@@ -26,21 +26,21 @@ public class Komentar implements Serializable {
     }
 
     public com.example.demo.entity.Kupac getK() {
-        return k;
+        return kupac;
     }
 
     public Komentar() {
     }
 
-    public Komentar(Kupac k, Restoran restoran, String tekst, int ocena) {
-        this.k = k;
+    public Komentar(Kupac kupac, Restoran restoran, String tekst, int ocena) {
+        this.kupac = kupac;
         this.restoran = restoran;
         this.tekst = tekst;
         this.ocena = ocena;
     }
 
     public void setK(Kupac k) {
-        this.k = k;
+        this.kupac = kupac;
     }
 
     public Long getId() {
@@ -52,10 +52,10 @@ public class Komentar implements Serializable {
     }
 
     public Kupac getKupac() {
-        return k;
+        return kupac;
     }
     public void setKupac(Kupac kupac) {
-        this.k = kupac;
+        this.kupac = kupac;
     }
 
     public Restoran getRestoran() {
@@ -86,7 +86,7 @@ public class Komentar implements Serializable {
     public String toString() {
         return "Komentar{" +
                 "id=" + id +
-                ", k=" + k +
+                ", k=" + kupac +
                 ", restoran=" + restoran +
                 ", tekst='" + tekst + '\'' +
                 ", ocena=" + ocena +

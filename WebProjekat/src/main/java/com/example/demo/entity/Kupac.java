@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -9,11 +11,12 @@ import java.util.Set;
 @Entity
 public class Kupac extends Korisnik implements Serializable {
 
-
-    @OneToMany(mappedBy = "kupac", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "kupac", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Porudzbina> porudzbina = new HashSet<>();
 
-    @OneToMany (cascade = CascadeType.ALL) //DONE relation = one to many
+    @JsonIgnore
+    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER) //DONE relation = one to many
     @JoinColumn(name = "komentar_id")
     private Set<Komentar> komentar = new HashSet<>();
 

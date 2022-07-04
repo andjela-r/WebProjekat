@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,13 +23,14 @@ public class Porudzbina implements Serializable {
     /*@ManyToMany(mappedBy = "porudzbina")
     private Set<Artikli> artikli = new HashSet<>();*/
 
-    @OneToMany (cascade = CascadeType.ALL)
+    @OneToMany (cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "stavka_id")
     private Set<StavkaPorudzbine> stavka = new HashSet<>();
 
     @ManyToOne //Done many to one
     private Restoran restoran;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "dostavljac_id")
     private Dostavljac dostavljac;
@@ -56,8 +58,8 @@ public class Porudzbina implements Serializable {
     public Porudzbina() {
     }
 
-    public Porudzbina(Set<StavkaPorudzbine> stavka, Restoran restoran, Dostavljac dostavljac, Date datum, double cena, STATUS status, Kupac kupac) {
-        this.stavka = stavka;
+    public Porudzbina(Restoran restoran, Dostavljac dostavljac, Date datum, double cena, STATUS status, Kupac kupac) {
+
         this.restoran = restoran;
         this.dostavljac = dostavljac;
         this.datum = datum;

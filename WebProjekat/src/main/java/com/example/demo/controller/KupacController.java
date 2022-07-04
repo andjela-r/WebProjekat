@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.KomentarDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.RegisterDto;
 import com.example.demo.entity.*;
+import com.example.demo.service.KomentarService;
 import com.example.demo.service.KupacService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,9 @@ public class KupacController {
 
     @Autowired
     private KupacService kupacService;
+
+    @Autowired
+    private KomentarService komentarService;
 
     @PostMapping("/api/register")
     public ResponseEntity<String> register (@RequestBody RegisterDto registerDto, HttpSession session){
@@ -69,6 +74,17 @@ public class KupacController {
         }
         Set<Porudzbina> artikli = loggedKupac.getPorudzbina();
         return ResponseEntity.ok(artikli);
+    }
+
+    @PostMapping("/api/kipac/porudzbine/ostavi-komentar")
+    public ResponseEntity<String> ostaviKomentar(@RequestBody KomentarDto komentarDto, HttpSession session){
+        Kupac loggedKupac = (Kupac) session.getAttribute("korisnik");
+        if(komentarDto.getTekst().isEmpty() || komentarDto.getOcena()==0)
+            return new ResponseEntity("Nisu uneti neophodni podaci.", HttpStatus.BAD_REQUEST);
+        Komentar newKomentar = komentarService.response(komentarDto, loggedKupac);
+
+        session.setAttribute("created", newKomentar);
+        return ResponseEntity.ok("Hvala na odgovoru.");
     }
 
 }
