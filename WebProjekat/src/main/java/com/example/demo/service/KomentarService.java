@@ -8,6 +8,8 @@ import com.example.demo.repository.KomentarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class KomentarService {
 
@@ -26,5 +28,9 @@ public class KomentarService {
         komentarRepository.save(komentar);
 
         return komentar;
+    }
+
+    public List<Komentar> getAllByRestoranId(Long restoranId) {
+        return komentarRepository.getByRestoranId(restoranId);
     }
 }

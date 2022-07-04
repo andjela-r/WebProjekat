@@ -9,4 +9,5 @@ import javax.transaction.Transactional;
 @Repository
 public interface ArtikliRepository extends JpaRepository<Artikli, Long>{
    boolean existsByNaziv(String naziv);
+
 }

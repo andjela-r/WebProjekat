@@ -69,8 +69,6 @@ public class MenadzerService {
             }
         }
     }*/
-    public void brisanjeArtikla(Long a) {
-        artikliRepository.deleteById(a);
-    }
+
 
 }

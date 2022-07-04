@@ -21,4 +21,11 @@ public class ArtikliService {
         artikliRepository.save(a);
     }
 
+    /*public void brisanjeArtikla(Artikli a) {
+       artikliRepository.deleteById(a.getId());
+    }*/
+
+  /*  public Artikli nadjiArtikal(Long id) {
+       return artikliRepository.findById(id);
+    }*/
 }

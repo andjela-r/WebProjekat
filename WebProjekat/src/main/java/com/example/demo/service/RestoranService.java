@@ -39,10 +39,11 @@ public class RestoranService {
         return restoranRepository.findByLokacija(lokacija);
     }
 
+    public Restoran save(Restoran restoran) {
+        return restoranRepository.save(restoran);
+    }
+
 //    public List<Komentar> listaKomenatara = porudzbina.getKupac().getKometar();
 //    listaKomentara.add(porudzbina.getKupac().getKometar())
 
-    public double izracunajOcenu(){
-        return 0;
-    }
 }

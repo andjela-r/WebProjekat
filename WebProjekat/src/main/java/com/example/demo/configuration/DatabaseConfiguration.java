@@ -44,8 +44,6 @@ public class DatabaseConfiguration {
     @Autowired
     private StavkaPorudzbineRepository stavkaPorudzbineRepository;
 
-
-
     @Bean
     public boolean instantiate() {
         TipKupca zlatniTipKupca = new TipKupca(
@@ -320,7 +318,58 @@ public class DatabaseConfiguration {
         porudzbinaRepository.save(gotovaPorudzbina);
         dostavljacRepository.save(dostavljac);
 
+     /*   Komentar komentar1 = new Komentar();
+        komentar1.setRestoran(camelot);
+        komentar1.setKupac(kupac);
+        komentar1.setTekst("Sve odlicno i prelepo");
+        komentar1.setOcena(5);
+        komentarRepository.save(komentar1);
 
+      //  camelot.setKomentar(komentar1);
+        //.save(camelot);
+
+        Komentar komentar2 = new Komentar();
+        komentar2.setRestoran(camelot);
+        komentar2.setKupac(kupac1);
+        komentar2.setTekst("Bilo hladno i bez veze");
+        komentar2.setOcena(2);
+        komentarRepository.save(komentar2);
+
+        Komentar komentar3 = new Komentar();
+        komentar3.setRestoran(tortillaCasa);
+        komentar3.setKupac(kupac);
+        komentar3.setTekst("njami");
+        komentar3.setOcena(4);
+        komentarRepository.save(komentar3);
+
+        Komentar komentar4 = new Komentar();
+        komentar4.setRestoran(tortillaCasa);
+        komentar4.setKupac(kupac2);
+        komentar4.setTekst("Kasnilo pola sata");
+        komentar4.setOcena(4);
+        komentarRepository.save(komentar4);
+
+        Komentar komentar5 = new Komentar();
+        komentar5.setRestoran(fresh);
+        komentar5.setKupac(kupac2);
+        komentar5.setTekst("Preljepo");
+        komentar5.setOcena(5);
+        komentarRepository.save(komentar5);
+
+        Komentar komentar6 = new Komentar();
+        komentar6.setRestoran(fresh);
+        komentar6.setKupac(kupac2);
+        komentar6.setTekst("Ukusno ali preslano");
+        komentar6.setOcena(4);
+        komentarRepository.save(komentar6);
+
+        Komentar komentar7 = new Komentar();
+        komentar7.setRestoran(camelot);
+        komentar7.setKupac(kupac2);
+        komentar7.setTekst("Vrlo misterioznog ukusa");
+        komentar7.setOcena(5);
+        komentarRepository.save(komentar7);
+*/
 
         return true;
     }

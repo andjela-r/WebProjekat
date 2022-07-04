@@ -3,11 +3,13 @@ package com.example.demo.controller;
 import com.example.demo.dto.MenadzerDto;
 import com.example.demo.dto.ArtikalDto;
 import com.example.demo.entity.*;
+import com.example.demo.repository.ArtikliRepository;
 import com.example.demo.repository.KorisnikRepository;
 import com.example.demo.repository.RestoranRepository;
 import com.example.demo.service.ArtikliService;
 import com.example.demo.service.KorisnikService;
 import com.example.demo.service.MenadzerService;
+import com.example.demo.service.RestoranService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.reactive.ReactiveSortingRepository;
 import org.springframework.http.HttpStatus;
@@ -29,10 +31,16 @@ public class MenadzerController {
     private MenadzerService menadzerService;
 
     @Autowired
+    private RestoranService restoranService;
+
+    @Autowired
     private ArtikliService artikliService;
 
     @Autowired
     private RestoranRepository restoranRepository;
+
+    @Autowired
+    private ArtikliRepository artikliRepository;
 
     @GetMapping("/api/menadzer/moj-restoran")
     public ResponseEntity<Restoran> getMyRestoran(HttpSession session){
@@ -111,10 +119,19 @@ public class MenadzerController {
     }
 
     //@Transactional
-    @PutMapping("/api/restorani/delete-artikal/{id}")
-    public ResponseEntity<String> deleteArtikal(@PathVariable Long id, HttpSession session) {
+    /* @DeleteMapping("/api/restorani/delete-artikal/{id}")
+    public ResponseEntity<String> deleteArtikal(@PathVariable("id") long id, HttpSession session) {
         Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
-        menadzerService.brisanjeArtikla(id);
+      //  Artikli currentArt = artikliService.getById(id);
+        Artikli currentArt;
+        currentArt = artikliService.nadjiArtikal(id);
+        Restoran restoran = ((Menadzer) loggedKorisnik).getRestoran();
+        if (restoran.getArtikliRestoran().contains(currentArt)) {
+            restoran.getArtikliRestoran().remove(currentArt);
+            restoranService.save(restoran);
+            return new ResponseEntity("Uspesno obrisan artikal", HttpStatus.OK);
+        }
+       // return new ResponseEntity(currentArt, HttpStatus.OK);
         return ResponseEntity.ok("Uspesno obrisan atrikal.");
-    }
+    }*/
 }
