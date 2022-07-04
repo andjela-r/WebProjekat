@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Komentar;
 import com.example.demo.entity.Korisnik;
 import com.example.demo.entity.Lokacija;
 import com.example.demo.entity.Restoran;
@@ -26,9 +27,7 @@ public class RestoranService {
     }
 
     public List<Restoran> getAllRestoran(){ return restoranRepository.findAll(); }
-    /*public String findByIme(String restoran){
-        restoran;
-    }*/
+
     public List<Restoran> findByNaziv(String naziv){
         return restoranRepository.findByNaziv(naziv);
     }
@@ -38,5 +37,12 @@ public class RestoranService {
     public List<Restoran> getByLokacija(Long id_lokacija){
         Lokacija lokacija = lokacijaRepository.findById(id_lokacija).get();
         return restoranRepository.findByLokacija(lokacija);
+    }
+
+//    public List<Komentar> listaKomenatara = porudzbina.getKupac().getKometar();
+//    listaKomentara.add(porudzbina.getKupac().getKometar())
+
+    public double izracunajOcenu(){
+        return 0;
     }
 }

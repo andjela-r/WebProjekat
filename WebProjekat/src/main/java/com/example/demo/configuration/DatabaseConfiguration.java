@@ -107,18 +107,21 @@ public class DatabaseConfiguration {
         camelot.setLokacija(lokacija1);
         camelot.setNaziv("The Camelot Novi Sad");
         camelot.setTip("Gastro pub");
+        camelot.setRadi(true);
         restoranRepository.save(camelot);
 
         Restoran tortillaCasa = new Restoran();
         tortillaCasa.setLokacija(lokacija);
         tortillaCasa.setNaziv("Tortilla Casa");
         tortillaCasa.setTip("Meksička hrana");
+        tortillaCasa.setRadi(true);
         restoranRepository.save(tortillaCasa);
 
         Restoran fresh = new Restoran();
         fresh.setLokacija(lokacija2);
         fresh.setNaziv("Sushi Fresh");
         fresh.setTip("Sushi");
+        fresh.setRadi(false);
         restoranRepository.save(fresh);
 
         Menadzer menadzer = new Menadzer(

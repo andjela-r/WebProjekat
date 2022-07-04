@@ -51,6 +51,15 @@ public class MenadzerService {
         }
         return null;
     }
+
+    public void radiRestoran(Korisnik loggedKorisnik){
+        Menadzer menadzer = (Menadzer) loggedKorisnik;
+        Restoran restoran = menadzer.getRestoran();
+        restoran.setRadi(true);
+        restoranRepository.save(menadzer.getRestoran());
+    }
+
+
     //NE RADI
     public void deleteArtikal(Long id_artikla, Korisnik korisnik) {
         Menadzer menadzer = (Menadzer) korisnik;

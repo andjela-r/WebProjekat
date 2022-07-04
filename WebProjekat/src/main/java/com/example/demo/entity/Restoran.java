@@ -26,8 +26,11 @@ public class Restoran implements Serializable {
     @OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)// DONE one to many
     private Set<Artikli> artikliRestoran = new HashSet<>(); //artikli treba da budu
 
-//    @OneToMany //DONE one to many
-//    private Set<Porudzbina> porudzbine = new HashSet<>();
+    @Column
+    private boolean radi;
+
+    @Column
+    private double ocena;
 
 
     public Lokacija getLokacija() {
@@ -48,6 +51,14 @@ public class Restoran implements Serializable {
         this.naziv = naziv;
         this.tip = tip;
         this.lokacija = lokacija;
+    }
+
+    public boolean isRadi() {
+        return radi;
+    }
+
+    public void setRadi(boolean radi) {
+        this.radi = radi;
     }
 
     public Long getId() {

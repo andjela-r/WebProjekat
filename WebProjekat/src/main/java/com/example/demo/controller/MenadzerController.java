@@ -103,10 +103,18 @@ public class MenadzerController {
         return new ResponseEntity(currentArt, HttpStatus.OK);
     }
 
+    @PutMapping("/api/restorani/otvaranje")
+    public ResponseEntity<String> otvoriRestoran(HttpSession session){
+        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
+        menadzerService.radiRestoran(loggedKorisnik);
+        return ResponseEntity.ok("Uspesno otvoren restoran.");
+    }
+
     //@Transactional
     @PutMapping("/api/restorani/delete-artikal/{id}")
-    public void deleteArtikal(@PathVariable Long id, HttpSession session) {
+    public ResponseEntity<String> deleteArtikal(@PathVariable Long id, HttpSession session) {
         Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
         menadzerService.deleteArtikal(id, loggedKorisnik);
+        return ResponseEntity.ok("Uspesno obrisan atrikal.");
     }
 }
