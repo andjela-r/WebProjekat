@@ -119,12 +119,11 @@ public class MenadzerController {
     }
 
     //@Transactional
-    /* @DeleteMapping("/api/restorani/delete-artikal/{id}")
+    @DeleteMapping("/api/restorani/delete-artikal/{id}")
     public ResponseEntity<String> deleteArtikal(@PathVariable("id") long id, HttpSession session) {
         Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
-      //  Artikli currentArt = artikliService.getById(id);
-        Artikli currentArt;
-        currentArt = artikliService.nadjiArtikal(id);
+        Artikli currentArt = artikliService.getById(id);
+
         Restoran restoran = ((Menadzer) loggedKorisnik).getRestoran();
         if (restoran.getArtikliRestoran().contains(currentArt)) {
             restoran.getArtikliRestoran().remove(currentArt);
@@ -133,5 +132,5 @@ public class MenadzerController {
         }
        // return new ResponseEntity(currentArt, HttpStatus.OK);
         return ResponseEntity.ok("Uspesno obrisan atrikal.");
-    }*/
+    }
 }
