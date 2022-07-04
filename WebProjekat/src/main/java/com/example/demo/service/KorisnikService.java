@@ -56,7 +56,7 @@ public class KorisnikService {
         return korisnikRepository.findById(id);
     }
 
-    public Komentar createKomentar(KomentarDto komDto, Korisnik loggedKorisnik) {
+   /* public Komentar createKomentar(KomentarDto komDto, Korisnik loggedKorisnik) {
         Kupac kupac = (Kupac) loggedKorisnik;
         Set<Porudzbina> porudzbine = kupac.getPorudzbina();
         if (loggedKorisnik.getUloga() == Uloga.KUPAC && porudzbine.getStatus() == DOSTAVLJENO) {
@@ -68,5 +68,5 @@ public class KorisnikService {
             return kom;
         }
         return null;
-    }
+    }*/
 }

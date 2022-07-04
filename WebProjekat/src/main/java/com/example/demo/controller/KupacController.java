@@ -2,8 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.RegisterDto;
-import com.example.demo.entity.Korisnik;
-import com.example.demo.entity.Kupac;
+import com.example.demo.entity.*;
 import com.example.demo.service.KupacService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class KupacController {
@@ -59,6 +59,16 @@ public class KupacController {
 
         kupacService.updateKupac(currentUser);
         return new ResponseEntity<Kupac>(currentUser, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/kupac/porudzbine")
+    public ResponseEntity<Set<Porudzbina>> getPorudzbine(HttpSession session){
+        Kupac loggedKupac = (Kupac) session.getAttribute("korisnik");
+        if (loggedKupac == null) {
+            return new ResponseEntity("Niste ulogovani.", HttpStatus.UNAUTHORIZED);
+        }
+        Set<Porudzbina> artikli = loggedKupac.getPorudzbina();
+        return ResponseEntity.ok(artikli);
     }
 
 }
